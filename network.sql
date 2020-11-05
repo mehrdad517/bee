@@ -29,11 +29,31 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table network.failed_jobs: ~0 rows (approximately)
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+
+-- Dumping structure for function network.fn_random_char
+DELIMITER //
+CREATE FUNCTION `fn_random_char`() RETURNS char(10) CHARSET utf8 COLLATE utf8_unicode_ci
+BEGIN
+	select concat(
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65),
+    char(round(rand()*25)+65)
+    ) INTO  @Random10CharacterString;
+   RETURN @Random10CharacterString;
+END//
+DELIMITER ;
 
 -- Dumping structure for table network.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
@@ -46,21 +66,10 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `created_at` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_index` (`queue`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table network.jobs: ~10 rows (approximately)
+-- Dumping data for table network.jobs: ~0 rows (approximately)
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-	(24, 'OrderQueueJobBuyer', '{"uuid":"b486f3a2-cbeb-4fe6-89f9-8a97cbed5035","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:36;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:18:\\"OrderQueueJobBuyer\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(25, 'OrderQueueJobAncestors', '{"uuid":"96fd3c57-326c-463d-bb11-15b5f763f028","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:37;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(26, 'OrderQueueJobAncestors', '{"uuid":"fdf794fa-c229-4084-ba93-6284a4bd37d0","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:38;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(27, 'OrderQueueJobAncestors', '{"uuid":"413d1793-d3c5-413d-8550-71189cf30909","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:39;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(28, 'OrderQueueJobAncestors', '{"uuid":"04a6964b-1675-463e-876e-651e03607b94","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:40;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(29, 'OrderQueueJobBuyer', '{"uuid":"0ae582cf-6a8a-42a8-84f9-5c0deae8c9e4","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:41;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:18:\\"OrderQueueJobBuyer\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(30, 'OrderQueueJobAncestors', '{"uuid":"f1d9735c-b440-4f06-af6c-4d120ff6f1fe","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:42;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(31, 'OrderQueueJobAncestors', '{"uuid":"87c05838-b7c1-4d5c-bbf3-4dcdbb72d257","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:43;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(32, 'OrderQueueJobAncestors', '{"uuid":"a25212f7-817f-4250-b5cd-cf156297f88c","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:44;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502),
-	(33, 'OrderQueueJobAncestors', '{"uuid":"ee5a041f-3492-41e2-b95b-680d9bb8a226","displayName":"App\\\\Jobs\\\\FireOrderQueueJob","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":null,"maxExceptions":null,"backoff":null,"timeout":null,"retryUntil":null,"data":{"commandName":"App\\\\Jobs\\\\FireOrderQueueJob","command":"O:26:\\"App\\\\Jobs\\\\FireOrderQueueJob\\":10:{s:43:\\"\\u0000App\\\\Jobs\\\\FireOrderQueueJob\\u0000orderQueueJobId\\";i:45;s:3:\\"job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";s:22:\\"OrderQueueJobAncestors\\";s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:19:\\"chainCatchCallbacks\\";N;s:5:\\"delay\\";N;s:10:\\"middleware\\";a:0:{}s:7:\\"chained\\";a:0:{}}"}}', 0, NULL, 1604003502, 1604003502);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 
 -- Dumping structure for table network.log
@@ -88,18 +97,30 @@ INSERT INTO `log` (`id`, `title`) VALUES
 -- Dumping structure for table network.marketer
 CREATE TABLE IF NOT EXISTS `marketer` (
   `user_id` int(11) NOT NULL,
-  `hierarchy` text NOT NULL DEFAULT '',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `parent_id` int(11) DEFAULT NULL,
+  `level` int(11) NOT NULL,
+  `position` tinyint(1) NOT NULL,
+  `code` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `ancestry` varchar(4000) CHARACTER SET utf8mb4 NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `code` (`code`),
+  UNIQUE KEY `ancestry` (`ancestry`) USING HASH,
+  KEY `parent_id` (`parent_id`),
+  KEY `level` (`level`),
+  KEY `position` (`position`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table network.marketer: ~5 rows (approximately)
 /*!40000 ALTER TABLE `marketer` DISABLE KEYS */;
-INSERT INTO `marketer` (`user_id`, `hierarchy`) VALUES
-	(1, '/1/'),
-	(2, '/1/2/'),
-	(3, '/1/2/3'),
-	(4, '/1/2/3/4/'),
-	(5, '/1/2/3/4/5/');
+INSERT INTO `marketer` (`user_id`, `parent_id`, `level`, `position`, `code`, `ancestry`, `created_at`, `updated_at`) VALUES
+	(1, NULL, 0, 1, '', '/1/', '2020-11-04 21:52:50', '2020-11-04 21:52:50'),
+	(108, 1, 1, 1, 'Bee20201104215358', '/1/108/', '2020-11-04 21:53:58', '2020-11-04 21:53:58'),
+	(110, 1, 1, 1, 'Bee20201104220337', '/1/110/', '2020-11-04 22:03:37', '2020-11-04 22:03:37'),
+	(111, 110, 2, 6, 'Bee20201104220722', '/1/110/111/', '2020-11-04 22:07:22', '2020-11-04 22:07:22'),
+	(116, 111, 3, 6, 'Bee20201104221811', '/1/110/111/116/', '2020-11-04 22:18:11', '2020-11-04 22:18:11'),
+	(118, 111, 3, 6, 'Bee20201104222418228', '/1/110/111/118/', '2020-11-04 22:24:18', '2020-11-04 22:24:18');
 /*!40000 ALTER TABLE `marketer` ENABLE KEYS */;
 
 -- Dumping structure for table network.marketer_proccess
@@ -135,6 +156,29 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
 	(4, '2020_10_29_145948_create_jobs_table', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+
+-- Dumping structure for table network.notification
+CREATE TABLE IF NOT EXISTS `notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `to` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('sms','email') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'sms',
+  `status` enum('pending','done','failed') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending',
+  `text` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `err` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table network.notification: ~5 rows (approximately)
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` (`id`, `to`, `type`, `status`, `text`, `err`, `created_at`, `updated_at`) VALUES
+	(26, '09398624739', 'sms', 'failed', NULL, 'Client error: `GET https://api.kavenegar.com/v1/58472B612B7156664978356558685845645A5851704B387A416D464D75527361532F376E7A5737597861303D/verify/lookup.json?receptor=09398624739&template=OrderQueueJobFailed&token=13&template=OrderQueueJobFailed&` resulted in a `424 Failed Dependency` response:\n{"return":{"status":424,"message":"الگوی مورد نظر پیدا نشد یا هنوز تائید نشده"},"entri (truncated...)\n', '2020-10-30 19:05:19', '2020-10-30 19:05:20'),
+	(27, '09398624739', 'sms', 'failed', NULL, 'Client error: `GET https://api.kavenegar.com/v1/58472B612B7156664978356558685845645A5851704B387A416D464D75527361532F376E7A5737597861303D/verify/lookup.json?receptor=09398624739&template=OrderQueueJobFailed&token=13&template=OrderQueueJobFailed&` resulted in a `424 Failed Dependency` response:\n{"return":{"status":424,"message":"الگوی مورد نظر پیدا نشد یا هنوز تائید نشده"},"entri (truncated...)\n', '2020-10-30 19:06:38', '2020-10-30 19:06:38'),
+	(28, '09398624739', 'sms', 'failed', NULL, 'Magic request methods require a URI and optional options array', '2020-10-30 19:07:31', '2020-10-30 19:07:34'),
+	(29, '09398624739', 'sms', 'failed', NULL, 'Undefined variable: tokens', '2020-10-30 19:29:33', '2020-10-30 19:29:33'),
+	(30, '09398624739', 'sms', 'done', 'کیهان کالا پارس\nمحاسبه سفارش با کد 13 با خطا مواجه شده است.\n', NULL, '2020-10-30 19:30:09', '2020-10-30 19:30:10');
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 
 -- Dumping structure for table network.order
 CREATE TABLE IF NOT EXISTS `order` (
@@ -222,6 +266,60 @@ INSERT INTO `period` (`id`, `title`, `from`, `to`, `status`, `hidden`, `active`,
 	(1, 'دوره یک', '2020-10-29 23:13:24', '2020-10-29 23:13:25', 0, 0, 1, '2020-10-29 23:13:28', '2020-10-29 23:38:35');
 /*!40000 ALTER TABLE `period` ENABLE KEYS */;
 
+-- Dumping structure for table network.refral_code
+CREATE TABLE IF NOT EXISTS `refral_code` (
+  `marketer_id` int(11) NOT NULL,
+  `position` tinyint(1) NOT NULL,
+  `direct_id` int(11) DEFAULT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`marketer_id`,`position`),
+  UNIQUE KEY `code` (`code`),
+  KEY `direct_id` (`direct_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table network.refral_code: ~31 rows (approximately)
+/*!40000 ALTER TABLE `refral_code` DISABLE KEYS */;
+INSERT INTO `refral_code` (`marketer_id`, `position`, `direct_id`, `code`, `created_at`) VALUES
+	(1, 1, 110, 'RF1P1@21212', '2020-11-04 22:03:37'),
+	(107, 1, NULL, 'RF107P1@RETKQADQWJ', '2020-11-04 21:46:35'),
+	(107, 2, NULL, 'RF107P2@FZHKGWUJLZ', '2020-11-04 21:46:35'),
+	(107, 3, NULL, 'RF107P3@RLGTBZUCYN', '2020-11-04 21:46:35'),
+	(107, 4, NULL, 'RF107P4@RWLMDGSVDZ', '2020-11-04 21:46:35'),
+	(107, 5, NULL, 'RF107P5@RIPDRERYUC', '2020-11-04 21:46:35'),
+	(107, 6, NULL, 'RF107P6@XMQSRHGMQU', '2020-11-04 21:46:35'),
+	(108, 1, NULL, 'RF108P1@CATTPQJXOC', '2020-11-04 21:53:58'),
+	(108, 2, NULL, 'RF108P2@RFYEZLGXWP', '2020-11-04 21:53:58'),
+	(108, 3, NULL, 'RF108P3@IUASMHWQNQ', '2020-11-04 21:53:58'),
+	(108, 4, NULL, 'RF108P4@TVXBMGSXJC', '2020-11-04 21:53:58'),
+	(108, 5, NULL, 'RF108P5@KQZCNGQMMZ', '2020-11-04 21:53:58'),
+	(108, 6, NULL, 'RF108P6@NOIVFOGLPO', '2020-11-04 21:53:58'),
+	(110, 1, NULL, 'RF110P1@CTQYTASOSW', '2020-11-04 22:03:37'),
+	(110, 2, NULL, 'RF110P2@EELQVIBHFF', '2020-11-04 22:03:37'),
+	(110, 3, NULL, 'RF110P3@KKVANQOYBI', '2020-11-04 22:03:37'),
+	(110, 4, NULL, 'RF110P4@NSXLOJFVQP', '2020-11-04 22:03:37'),
+	(110, 5, NULL, 'RF110P5@EYIRKCCGZF', '2020-11-04 22:03:37'),
+	(110, 6, 111, 'RF110P6@CSLBXMQUDD', '2020-11-04 22:07:22'),
+	(111, 1, NULL, 'RF111P1@CBWJCKRHKB', '2020-11-04 22:07:22'),
+	(111, 2, NULL, 'RF111P2@AYUELQWLNH', '2020-11-04 22:07:22'),
+	(111, 3, NULL, 'RF111P3@YWPKCGXWQO', '2020-11-04 22:07:22'),
+	(111, 4, NULL, 'RF111P4@VNEGRSOSUW', '2020-11-04 22:07:22'),
+	(111, 5, NULL, 'RF111P5@CSHGJBCJNO', '2020-11-04 22:07:22'),
+	(111, 6, 118, 'RF111P6@FKIKCEOJEP', '2020-11-04 22:24:18'),
+	(116, 1, NULL, 'RF116P1@VTKPVKNKJR', '2020-11-04 22:18:11'),
+	(116, 2, NULL, 'RF116P2@IQDSESEPPC', '2020-11-04 22:18:11'),
+	(116, 3, NULL, 'RF116P3@REVPNUNCWG', '2020-11-04 22:18:11'),
+	(116, 4, NULL, 'RF116P4@MSERXOCRDN', '2020-11-04 22:18:11'),
+	(116, 5, NULL, 'RF116P5@JERZWKLASO', '2020-11-04 22:18:11'),
+	(116, 6, NULL, 'RF116P6@OEEJGFGNZI', '2020-11-04 22:18:11'),
+	(118, 1, NULL, 'RF118P1@MRWMRYRQDT', '2020-11-04 22:24:18'),
+	(118, 2, NULL, 'RF118P2@KSKXIUCXNR', '2020-11-04 22:24:18'),
+	(118, 3, NULL, 'RF118P3@XNVRWLLZOX', '2020-11-04 22:24:18'),
+	(118, 4, NULL, 'RF118P4@VLQVIEUNEI', '2020-11-04 22:24:18'),
+	(118, 5, NULL, 'RF118P5@BGDXECWGOY', '2020-11-04 22:24:18'),
+	(118, 6, NULL, 'RF118P6@GHQKBYTWFG', '2020-11-04 22:24:18');
+/*!40000 ALTER TABLE `refral_code` ENABLE KEYS */;
+
 -- Dumping structure for procedure network.sp_calculate_marketer_plan_and_point
 DELIMITER //
 CREATE PROCEDURE `sp_calculate_marketer_plan_and_point`(
@@ -250,123 +348,123 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Dumping structure for procedure network.sp_marketer_info
+DELIMITER //
+CREATE PROCEDURE `sp_marketer_info`(
+	IN `id` INT
+)
+BEGIN
+	SELECT u.id, u.name, u.family, u.gender, u.mobile, u.email, u.`status`, u.national_code, u.nickname, m.code, m.`level` FROM `user` AS u
+	LEFT JOIN marketer AS m ON m.user_id = u.id
+	WHERE u.id = id;
+END//
+DELIMITER ;
+
+-- Dumping structure for procedure network.sp_marketer_register
+DELIMITER //
+CREATE PROCEDURE `sp_marketer_register`(
+	IN `rcp` VARCHAR(50),
+	IN `nickname_p` VARCHAR(50),
+	IN `name_p` VARCHAR(50),
+	IN `family_p` VARCHAR(50),
+	IN `gender_p` VARCHAR(1),
+	IN `mobile_p` VARCHAR(11),
+	IN `email_p` VARCHAR(50),
+	IN `national_code_p` VARCHAR(10),
+	IN `password_p` VARCHAR(255)
+)
+BEGIN
+
+	DECLARE i int;
+
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+	BEGIN
+	 ROLLBACK;
+	  GET DIAGNOSTICS CONDITION 1
+     @err = MESSAGE_TEXT;
+	  SELECT @err AS err;
+	END;
+	
+	START TRANSACTION;
+
+
+	-- fetch refral code info
+	SELECT marketer_id, refral_code.`position`, marketer.ancestry, marketer.`level` 
+	INTO @parent_id, @state, @ancestry, @levelId 
+	FROM refral_code 
+	LEFT JOIN marketer ON marketer.user_id = refral_code.marketer_id
+	WHERE refral_code.`code` = rcp LIMIT 1;
+
+
+	IF @parent_id IS not NULL AND  @parent_id <> 0
+	then
+	
+
+	INSERT INTO user (`role_id`, `name`, `family`, `gender`, mobile, email, `password`, national_code, remember_token, nickname, created_at) 
+	VALUES('marketer', name_p, family_p, IF(gender_p = '', 'm', gender_p), mobile_p, if(email_p = '', NULL, email_p), password_p, if(
+	national_code_p = '', NULL, national_code_p), MD5(fn_random_char()), if(nickname_p = '', NULL, nickname_p), NOW());
+	
+	SELECT LAST_INSERT_ID() into @userId;
+	
+	
+	INSERT INTO marketer (user_id, parent_id, `position`, ancestry, `level`, `code`, created_at) VALUES(@userId, @parent_id, @state, CONCAT(@ancestry, @userId, '/'), @levelId + 1, CONCAT('Bee', REPLACE(REPLACE( REPLACE(REPLACE(NOW(3), '.', ''), '-', ''), ':', ''), ' ', '')), NOW());
+	
+
+	
+	-- update refral code table
+	UPDATE refral_code SET direct_id = @userId WHERE `code` = rcp;
+	
+	-- insert to refral code
+	SET i = 1;
+	label: LOOP 
+		IF(i > 6) THEN
+			LEAVE label;
+		END IF;
+			INSERT INTO refral_code (marketer_id, `position`, `code`) VALUES(@userId, i, CONCAT('RF', @userId, 'P', i, '@', fn_random_char()));
+			SET i = i + 1;
+	END LOOP;
+	
+	CALL sp_marketer_info(@userId);
+			
+	END if;
+	
+	COMMIT;
+END//
+DELIMITER ;
+
 -- Dumping structure for table network.user
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `nickname` varchar(50) COLLATE utf8_unicode_ci DEFAULT 'marketer',
+  `national_code` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'marketer',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `family` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `gender` enum('m','f') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'm',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `mobile` (`mobile`),
+  UNIQUE KEY `nickname` (`nickname`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `national_code` (`national_code`),
+  KEY `role_id` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table network.user: ~100 rows (approximately)
+-- Dumping data for table network.user: ~4 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Gladyce Denesik', 'reginald.nienow@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ki2EM4zBTT', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(2, 'Hershel Abbott PhD', 'corwin.viola@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZCCUu8k58f', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(3, 'Lacey Huels II', 'kreiger.kailee@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'mRbUu3o69K', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(4, 'Marcel Bartoletti', 'xkeebler@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vL4Goki2E6', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(5, 'Sophia Kuhn', 'jbrakus@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'diz613vE1L', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(6, 'Mrs. Orie Swift', 'shudson@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'bp9jkrEp54', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(7, 'Lily Kuphal', 'hettinger.clair@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'L7QP4z4W29', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(8, 'Zackery Lockman', 'sheila.ruecker@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xzMU2EOXlv', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(9, 'Felipe Mraz', 'gwolff@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'oP0Dp4siTe', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(10, 'Clark Bartell', 'kkreiger@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RaFQQAfRMw', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(11, 'Chloe Hyatt', 'nelson.hessel@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hG5sZ6oZxY', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(12, 'Charity Wyman', 'angelina.carter@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eVZE1p5SN6', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(13, 'Sydnie Purdy', 'wfranecki@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'udywaw2uvD', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(14, 'Albin Champlin', 'zfeest@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'PchZp5hgJg', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(15, 'Rodger Larkin', 'icremin@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'noLjFO9WKm', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(16, 'Valentine Collier', 'abshire.german@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '29VMoezqA1', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(17, 'Ms. Loraine Hane II', 'swisozk@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0sgF1Wb9hR', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(18, 'Dr. Grady Schulist DDS', 'sonny.renner@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'L95yzZVB9D', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(19, 'Jarrell Tillman Jr.', 'levi84@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8B8X3R1ojN', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(20, 'Miss Esmeralda Runolfsdottir II', 'caroline07@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gawNVjlV8u', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(21, 'Dr. Noemy Hintz', 'awisoky@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'WELfYtDwHY', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(22, 'Betsy Jacobs Jr.', 'christopher.hagenes@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'nAxaIDgTiy', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(23, 'Glennie Willms PhD', 'ffritsch@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'twOgmuSUNh', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(24, 'Ms. Alexandrea Roob MD', 'cleveland58@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'y6O0YGrDKJ', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(25, 'Dale Bechtelar', 'retha83@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hCLw2QGy2c', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(26, 'Prof. Freeman Weissnat', 'jeromy83@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OZEsNBRYkt', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(27, 'Miss Mikayla Berge III', 'jason97@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'uzoCuvo1Go', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(28, 'Eda Schuster', 'treva.okeefe@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'm89t0z9Uqz', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(29, 'Scarlett Gaylord', 'jordane86@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'MyxbBnKZLL', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(30, 'Etha Kutch MD', 'schultz.demarcus@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '8eH85fobGe', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(31, 'Makenna Hodkiewicz', 'sawayn.ariane@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BM547tywk1', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(32, 'Alva Gorczany', 'hills.abigail@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gbfziBrvi7', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(33, 'Dr. Eudora Upton', 'prosacco.hubert@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'IrEV6oEd9g', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(34, 'Bailey Sporer', 'greenfelder.herbert@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'nCySKmm4YX', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(35, 'Dr. Herman Kuhn', 'akshlerin@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BaD6wDg9Rv', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(36, 'Dora Adams Jr.', 'josiane.schroeder@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HZ8LUx2aUj', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(37, 'Mr. Preston Fritsch', 'lane65@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'E4NUmibUCT', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(38, 'Raven Schroeder', 'lstehr@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vrnZY0WH7L', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(39, 'Lucious Bauch', 'jones.triston@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'uKrPoNmuMd', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(40, 'Kyleigh Frami IV', 'skyla07@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AdX80PL1Co', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(41, 'Dr. Lexi Cartwright', 'breanna65@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'fG72dXbhTe', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(42, 'Prof. Garnet Torphy DVM', 'nbailey@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'CTvMfd4gfu', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(43, 'Graciela Labadie V', 'horace12@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VKezRpP2IX', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(44, 'Madonna Shanahan', 'marjolaine.wyman@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'lHkGipvSNx', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(45, 'Prof. Gretchen Dooley Sr.', 'fsporer@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BgVugLLKxK', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(46, 'Elyssa Stark', 'ewalker@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'oiIyGc3Sht', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(47, 'Concepcion Corwin II', 'sandrine.rogahn@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'eQQQIrA3GL', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(48, 'Ceasar Lowe', 'tatyana25@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tWtnnAtZAv', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(49, 'Israel D\'Amore', 'bogisich.fletcher@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'wApamDa8EG', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(50, 'Loma Nikolaus', 'wuckert.jabari@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OJRA1HQ4LY', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(51, 'Brendan McCullough', 'blanca19@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'SPDvyhaXKz', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(52, 'Birdie Effertz DDS', 'georgette83@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vpkPuqKH9e', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(53, 'Elva Schaefer', 'iparisian@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BsQrUN8tzf', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(54, 'Enos Ryan', 'kertzmann.nathaniel@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VENymueGHq', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(55, 'Reynold Koss', 'ebony.ziemann@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'vjNOhKIjnb', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(56, 'Kody Bradtke', 'xhomenick@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Gr68dUZEH6', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(57, 'Lennie Hahn', 'caesar.reilly@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'kI9q05GIzl', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(58, 'Dr. Millie Kuvalis', 'antonia08@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'fyvVeCPgh4', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(59, 'Keyon Littel', 'murazik.coty@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'IxKJg04hdG', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(60, 'Timmy Schmeler II', 'claude80@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '1PpR04bNU2', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(61, 'Frieda Greenholt', 'eromaguera@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'v3rnqlpI28', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(62, 'Dr. Bette Feil', 'kirlin.julianne@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'yTU6QefNZz', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(63, 'Prof. Leanna Stiedemann', 'oran70@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jFIcz9TKmZ', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(64, 'Onie Gibson', 'marc56@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'HptB9AxMb1', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(65, 'Xander Crist', 'vbartell@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'U9zmIqDrEY', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(66, 'Myriam Borer DDS', 'gusikowski.lane@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'GEig1iNd8c', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(67, 'Arvel Hartmann', 'qmetz@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'q7WEl1OsN1', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(68, 'Nicole D\'Amore', 'rico.weimann@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pfyvQAPqgA', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(69, 'Mr. Elmo Rohan', 'walsh.edward@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'DVnYeucspp', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(70, 'Lawson Jenkins DDS', 'casimir58@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'BOUZH471bU', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(71, 'Icie Morar II', 'fblock@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'zckxCPPd4P', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(72, 'Emilia Hansen', 'dangelo85@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'z0tOQwmUVi', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(73, 'Chyna Homenick', 'ggerlach@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '94D85592ur', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(74, 'Madison Brekke', 'fledner@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'uNXAANto5J', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(75, 'Kaycee Steuber', 'magnolia59@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xHhJZOgaLq', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(76, 'Tressie McGlynn', 'zieme.miles@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '4ZWka8l6NP', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(77, 'Lelah Runolfsdottir', 'upton.jameson@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'tWyLfbae2y', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(78, 'Emmanuelle Wuckert', 'ottis21@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'WFER5hfAUy', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(79, 'Maxime Powlowski', 'luz35@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RUj1lrIgx9', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(80, 'Remington Russel', 'grant.lisandro@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'y9KhsgEeHf', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(81, 'Travis Tillman', 'xschmitt@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'fFgE58hBMX', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(82, 'Christop Moen', 'veum.tiffany@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'FPpmxuPQTn', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(83, 'Carissa Purdy', 'glarkin@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'CQIsdy1iOL', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(84, 'Prof. Newton Hansen', 'miller.violet@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VdyAIzuCwO', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(85, 'Sven Renner', 'zharber@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'pAGtIjkPDX', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(86, 'Rollin Larkin DDS', 'jules.runolfsdottir@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RZjsxza9I3', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(87, 'Camden Prohaska', 'lia.schaden@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '26rmcXVZVH', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(88, 'Mr. Ali Schuster PhD', 'camryn74@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZYP8ctOrCz', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(89, 'Bernita Osinski Jr.', 'afeest@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jrwBKVCsci', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(90, 'Prof. Meggie Murphy I', 'leuschke.katelynn@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '03e7l1Eirw', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(91, 'Raquel Schimmel', 'rohan.ivah@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'DZFbQ2Zeb4', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(92, 'Macie Jacobson', 'weissnat.aliza@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'VPwmkXH9d6', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(93, 'Daphney Purdy', 'ratke.adolf@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'CYcJRthIz4', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(94, 'Carroll Stehr', 'odooley@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'T1BBdxOk2F', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(95, 'Zola Cole', 'lessie76@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'RwhFoJDbfH', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(96, 'Travon Heaney', 'darion.lehner@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'jYUXRWTVJm', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(97, 'Connor Wuckert', 'schmeler.manley@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZTHBMl4TdO', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(98, 'Ms. Heather Hudson IV', 'ohyatt@example.com', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Oj5fyCKNbW', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(99, 'Dr. Paige Harber', 'jovany.macejkovic@example.net', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'fIASZwcQXf', '2020-10-29 19:39:16', '2020-10-29 19:39:16'),
-	(100, 'Wiley Murray', 'walter.muriel@example.org', '2020-10-29 19:39:16', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'bmHbvdB1nf', '2020-10-29 19:39:16', '2020-10-29 19:39:16');
+INSERT INTO `user` (`id`, `email`, `mobile`, `nickname`, `national_code`, `role_id`, `name`, `family`, `gender`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 'admin@gmail.com', '09398624739', 'marketer', NULL, 'marketer', '', '', 'm', '', NULL, 1, NULL, '2020-11-04 21:49:26'),
+	(108, '', '09361753251', 'mehrdad', '3920206231', 'marketer', 'mehrdads', 'masoumi', '', 'asdasd', '1fa433301c8e545216a3a34d227dc9c8', 1, NULL, '2020-11-04 21:53:58'),
+	(110, NULL, '09153264512', '', '', 'marketer', 'm', 'd', 'm', 'dddd', '05070cd114bb4745f01f45199b3882cc', 1, '2020-11-04 22:03:37', '2020-11-04 22:03:37'),
+	(111, NULL, '09361753255', NULL, NULL, 'marketer', 'مهرداد', 'معصومی', 'm', 'asasa', 'd303ab91905fcd4617fcb5eca8afc9b3', 1, '2020-11-04 22:07:22', '2020-11-04 22:07:22'),
+	(116, NULL, '09153265147', NULL, NULL, 'marketer', 'aaa', 'aaa', 'm', 'asas', '9d1de64deb3ae28c2ee3800bdea82d82', 1, '2020-11-04 22:18:11', '2020-11-04 22:18:11'),
+	(118, NULL, '09153265146', NULL, NULL, 'marketer', 'aaa', 'aaa', 'm', 'asas', 'f42e6439957433c1adc5740b7dd2ea66', 1, '2020-11-04 22:24:18', '2020-11-04 22:24:18');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- Dumping structure for trigger network.tiger_order_queue_job_before_insert
