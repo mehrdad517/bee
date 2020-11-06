@@ -1,0 +1,223 @@
+.header-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-inner .search-btn {
+    margin: 0 10px;
+}
+.header-account {
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #ECEFF1;
+    border-radius: 50px;
+    display: -moz-box;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #78909C;
+}
+.header-account span {
+    margin-right: 7px;
+}
+.Header {
+    margin-bottom: 15px;
+}
+.Menubtn {
+    background-color: var(--Primary-color) !important;
+    border-radius: 5px;
+    height: 30px !important;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 1px 10px;
+    cursor: pointer;
+}
+.Menubtn span {
+    color: #202020 !important ;
+    font-size: 14px;
+    margin-right: 7px;
+    /*font-weight: bold;*/
+}
+
+.Menubtn img {
+    width: 20px;
+    height: auto;
+}
+
+.Header-top {
+    position: relative;
+    padding: 15px 0;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    z-index: 900;
+    top: 0;
+    transition: top .2s;
+}
+.fixing{
+    position: fixed!important;
+}
+.Header-top-right{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    height: 100%;
+}
+.Header-top-right-search {
+    width:calc(30% - 48px);
+    position: absolute;
+    margin-right: 120px;
+    margin-top: 6.5px;
+}
+.HeadLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    margin-left: -70px;
+}
+.HeadLogo img{
+    width: 100%;
+    height: 50px;
+}
+.HeadMenu{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 20px;
+}
+.HeadLogo a{
+    display: flex;
+    align-items: center;
+}
+
+.HeadProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-btn {
+    align-items: center;
+    font-size: 13px;
+//background-color:#ff6874;
+//color: white;
+    border: 1px solid rgba(0,0,0,.09);
+    padding: 5px 10px;
+    border-radius: 5px;
+    height: unset;
+    display: flex;
+    align-self: center;
+    cursor: pointer;
+    color: var(--Primary_color) !important;
+    transition: .3s;
+}
+.login-btn:hover{
+    background-color:var(--Primary_color) !important;
+    color: white!important;
+    border: 1px solid rgba(0,0,0,.09);
+//color: var(--Primary_color) !important;
+}
+.login-btn-icon{
+//display: none;
+}
+.shop-btn{
+    padding: 10px;
+    cursor: pointer;
+    color: rgba(0,0,0,.3);
+    transition: .3s;
+}
+.shop-btn:hover{
+    color: var(--Primary_color);
+}
+@media all and (max-width: 1024px){
+    .HeadLogo img {
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 990px){
+    .Header{
+        margin-bottom: 10px;
+    }
+    .Header-top {
+        padding-bottom: 50px;
+    }
+    .Header-top-right-search {
+        margin: 0;
+        bottom: 10px;
+        align-content: center;
+        width:calc(100% - 48px);
+    }
+}
+
+@media all and (max-width: 767px){
+    .header-inner {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .Header-top {
+        padding-top: 5px;
+        padding-bottom: 60px;
+    }
+
+    .HeadLogo {
+        justify-content: flex-end;
+    }
+    .Menubtn span {
+        display: none;
+    }
+
+}
+
+@media all and (max-width: 600px){
+    .shop-btn {
+        padding: 10px 0;
+    }
+    .login-btn-icon {
+        margin-left: 7px;
+        font-size: 12px;
+        color: var(--Primary-color);
+    }
+    .login-btn-icon img{
+        padding: 0 10px;
+    }
+    .Header{
+    //margin-bottom: 135px;
+    }
+    .Header-top-right-search {
+        width:calc(100% - 32px);
+    }
+    .HeadProfile {
+        align-items: center;
+    }
+
+    .MuiButton-iconSizeMedium > *:first-child {
+        display: none;
+    }
+    .Header-top-right {
+        width: 145%;
+    }
+    .login-btn {
+        align-self: unset;
+        display: none;
+    }
+    .login-btn-icon{
+        display: flex;
+    }
+}
+@media all and (max-width: 360px){
+    .Header-top-right {
+        width: 130%;
+    }
+    .shop-btn {
+        padding: 10px 0;
+    }
+}

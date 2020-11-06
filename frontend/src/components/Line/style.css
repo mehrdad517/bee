@@ -1,0 +1,19 @@
+.line {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin: 10px 0 0px 0;
+}
+
+.line h3 {
+    font-size: 18px;
+    padding: 10px 0px;
+    font-weight: bold;
+}
+
+.line a {
+    font-size: 12px;
+    color: var(--Success-color);
+}

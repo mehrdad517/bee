@@ -1,0 +1,102 @@
+
+.categoryMainBox{
+    padding: 7px;
+    border-radius: 15px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.15) ;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+}
+.categoryMainBox:hover .categoryBox{
+    background-color: var(--Primary-color);
+}
+.categoryMainBox:hover .categoryPrice span ,categoryBoxTitle{
+    color:white;
+}
+.categoryMainBox:hover .categoryBoxTitle{
+    color:white;
+}
+.categoryBoxImage{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7px;
+}
+.categoryBoxImage img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.categoryBox{
+    background-color: #fce11e8c;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 15px;
+    overflow-y: auto;
+    justify-content: flex-end;
+}
+.categoryPrice{
+    display: flex;
+    flex-direction: column;
+
+}
+.categoryPrice span:last-child{
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: bold;
+}
+.categoryOff{
+    color: #F33455;
+    text-decoration: line-through;
+    font-size: 12px;
+    font-weight: bold;
+}
+.categoryPriceBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+.categoryBoxTitle{
+    color: var(--Dark-color);
+    font-size: 14px;
+    font-weight: bold;
+}
+.categoryPriceBtn{
+    background-color: aliceblue;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.15) ;
+    cursor: pointer;
+}
+
+
+
+
+.swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after {
+    content: 'next';
+    background-color: black;
+    height: 20px;
+    width: 20px;
+    color: white;
+    display: -moz-box;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bolder;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.09);
+}
+
+
+
+

@@ -1,0 +1,53 @@
+.mini_box {
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.09);
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: all .2s ease;
+    width: 100%;
+    margin-top: 40px;
+}
+.mini_box:hover {
+    background-color: var(--Primary-color);
+}
+.mini_box_total{
+    display: flex;
+    margin-top: 10px;
+}
+.mini_box_title{
+    color: #d1bd41;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all .2s ease;
+}
+.mini_box:hover .mini_box_title{
+    color: white;
+}
+.mini_box_off{
+    color: #78909C;
+    font-weight: bold;
+    opacity: .7;
+    text-decoration: line-through;
+    font-size: 12px;
+    margin-left: 20px;
+}
+.mini_box_price{
+    color:#78909C;
+    font-weight: bold;
+    font-size: 12px;
+}
+.mini_box_image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 30px;
+}
+.mini_box_image img{
+    max-width: 100%;
+    max-height: 100%;
+}

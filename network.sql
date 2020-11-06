@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `marketer` (
   KEY `position` (`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table network.marketer: ~5 rows (approximately)
+-- Dumping data for table network.marketer: ~6 rows (approximately)
 /*!40000 ALTER TABLE `marketer` DISABLE KEYS */;
 INSERT INTO `marketer` (`user_id`, `parent_id`, `level`, `position`, `code`, `ancestry`, `created_at`, `updated_at`) VALUES
 	(1, NULL, 0, 1, '', '/1/', '2020-11-04 21:52:50', '2020-11-04 21:52:50'),
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table network.migrations: ~3 rows (approximately)
+-- Dumping data for table network.migrations: ~4 rows (approximately)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `period` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table network.period: ~0 rows (approximately)
+-- Dumping data for table network.period: ~1 rows (approximately)
 /*!40000 ALTER TABLE `period` DISABLE KEYS */;
 INSERT INTO `period` (`id`, `title`, `from`, `to`, `status`, `hidden`, `active`, `created_at`, `updated_at`) VALUES
 	(1, 'دوره یک', '2020-10-29 23:13:24', '2020-10-29 23:13:25', 0, 0, 1, '2020-10-29 23:13:28', '2020-10-29 23:38:35');
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `refral_code` (
   KEY `direct_id` (`direct_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table network.refral_code: ~31 rows (approximately)
+-- Dumping data for table network.refral_code: ~37 rows (approximately)
 /*!40000 ALTER TABLE `refral_code` DISABLE KEYS */;
 INSERT INTO `refral_code` (`marketer_id`, `position`, `direct_id`, `code`, `created_at`) VALUES
 	(1, 1, 110, 'RF1P1@21212', '2020-11-04 22:03:37'),
@@ -456,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `role_id` (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table network.user: ~4 rows (approximately)
+-- Dumping data for table network.user: ~6 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `email`, `mobile`, `nickname`, `national_code`, `role_id`, `name`, `family`, `gender`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 'admin@gmail.com', '09398624739', 'marketer', NULL, 'marketer', '', '', 'm', '', NULL, 1, NULL, '2020-11-04 21:49:26'),

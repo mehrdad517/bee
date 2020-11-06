@@ -1,0 +1,32 @@
+:root {
+    --Primary-color: #fecc00;
+    --Danger-color: #ff2762;
+    --Success-color: rgb(46, 204, 113);
+    --Info-color: rgb(74, 84, 128);
+    --Warning-color: rgb(255, 225, 82);
+    --Dark-color: rgba(0, 0, 0, .7);
+    --Text-color: rgba(0, 0, 0, .7);
+
+    /* other var  */
+    --box-shadow: 0 0 12px 1px rgba(0, 0, 0, .1);
+    --border: rgba(164, 164, 164, 0.2);
+
+}
+body {
+    font-family: Vazir !important;
+    font-size: 14px;
+    background-color: #ebf0f6;
+}
+a{
+    text-decoration: none;
+}
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1,h2,h3, h4,h5, h6 {
+    padding: 0;
+    margin: 10px 0;
+}
