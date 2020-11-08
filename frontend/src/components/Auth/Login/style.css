@@ -1,0 +1,14 @@
+.login-header {
+    background-color: var(--Dark-color);
+    color: var(--Success-color);
+    display: flex;
+    justify-content: center;
+    min-height: 200px;
+    align-items: center;
+}
+.login-header h1 {
+    font-size: 50px;
+}
+.login-inner {
+    padding: 25px;
+}

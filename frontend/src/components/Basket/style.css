@@ -1,0 +1,23 @@
+.NotFound {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+  flex-direction:  column;
+  align-content: center;
+  align-items: center;
+}
+.NotFound h2 {
+  margin-top: 20px;
+  color: var(--font_color_light);
+  text-align: left;
+  direction: ltr;
+}
+.NotFound img {
+  margin: 25px 0 50px 0;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .NotFound img {
+    width: 100%;
+  }
+}

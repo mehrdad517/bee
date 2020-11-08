@@ -5,6 +5,8 @@ import blogReducers from './blog'
 import productSwiperReducers from "./productSwiper";
 import brandReducers from './brand'
 import sliderReducers from './slider'
+import cardReducers from './card'
+import addressReducers from "./address";
 
 
 const rootReducer = combineReducers({
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
     blogReducers,
     productSwiperReducers,
     brandReducers,
-    sliderReducers
+    sliderReducers,
+    cardReducers,
+    addressReducers
 });
 
 export default rootReducer;

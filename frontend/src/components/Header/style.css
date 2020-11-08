@@ -4,6 +4,22 @@
     justify-content: space-between;
     align-items: center;
 }
+.Header_counter {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bolder;
+    min-width: 25px;
+    min-height: 20px;
+    border-radius: 100%;
+    background-color: #e23d7f;
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .header-inner .search-btn {
     margin: 0 10px;
 }
@@ -21,6 +37,7 @@
     justify-content: center;
     cursor: pointer;
     color: #78909C;
+    position: relative;
 }
 .header-account span {
     margin-right: 7px;

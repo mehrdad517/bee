@@ -27,7 +27,7 @@ class Api {
                 toast.error('مجددا وارد شوید.');
 
             } else if (response.status === 404) {
-
+                toast.error('خطای سرور: سرویس مورد نظر دچار اختلال شده است.');
             } else {
                 toast.error(response.statusText);
             }

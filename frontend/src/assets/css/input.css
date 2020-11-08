@@ -1,0 +1,34 @@
+.input{
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+label.input{
+    font-size: 14px;
+}
+.input input{
+    margin: 12px 0  0  0;
+    padding: 15px 45px 15px 15px;
+    border: 1px solid #B0BEC5;
+    outline: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+.input input::placeholder{
+    font-weight: 500;
+}
+.input input:focus{
+    border: 1px solid var(--Primary-color);
+    box-shadow:  0 4px 8px 0 var(--primary-shadow);
+}
+.input_image{
+    position: absolute;
+    max-width: 25px;
+    max-height: 25px;
+    top: 45px;
+    right: 20px;
+}

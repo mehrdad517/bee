@@ -21,6 +21,7 @@ import accountIcon from './../../assets/img/account.png'
 import cartIcon from './../../assets/img/cart.png'
 import searchIcon from './../../assets/img/search.png'
 import logo from './../../assets/img/logo-min.png'
+import {AUTH_DIALOG} from "../../redux/types";
 
 const Header = () => {
 
@@ -66,11 +67,12 @@ const Header = () => {
                             </div>
                             <div className="HeadProfile">
                                 <img src={searchIcon} className={'search-btn'}/>
-                                <div className="header-account">
+                                <div className="header-account" onClick={() => dispatch({type: AUTH_DIALOG, payload: true})}>
                                     <img src={accountIcon} className="jsx-2982413346" />
-                                    <span className="jsx-2982413346">  حساب کاربری</span>
+                                    <span className="jsx-2982413346">حساب کاربری</span>
                                 </div>
-                                <div className="header-account">
+                                <div className="header-account" onClick={() => history.push('/card')}>
+                                    <span className="Header_counter">{AppState.cardReducers.data.length > 0 ? AppState.cardReducers.data.length : 0}</span>
                                     <img src={cartIcon} className="jsx-2982413346" />
                                     <span className="jsx-2982413346">سبد خرید</span>
                                 </div>

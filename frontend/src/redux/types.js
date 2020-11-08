@@ -4,6 +4,16 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_REFRESH = 'AUTH_REFRESH';
 export const AUTH_DIALOG = 'AUTH_DIALOG';
 
+// card
+export const CARD_REQUESTING = 'CARD_REQUESTING';
+export const CARD_SUCCESS = 'CARD_SUCCESS';
+export const CARD_FAILURE = 'CARD_FAILURE';
+
+// address
+export const ADDRESS_REQUESTING = 'ADDRESS_REQUESTING';
+export const ADDRESS_SUCCESS = 'ADDRESS_SUCCESS';
+export const ADDRESS_FAILURE = 'ADDRESS_FAILURE';
+
 // setting
 export const SETTING_REQUESTING = 'SETTING_REQUESTING';
 export const SETTING_SUCCESS = 'SETTING_SUCCESS';

@@ -10,13 +10,13 @@ const Master = (props) => {
     const { children } = props;
 
     const dispatch = useDispatch();
-    const { data } = useSelector(state => state.settingReducers);
+    const  AppState  = useSelector(state => state);
 
     useEffect(() => {
-        if (data.ready !== 'success') {
+        if (AppState.settingReducers.ready !== 'success') {
             dispatch(setting());
         }
-    }, []);
+    }, [AppState.settingReducers.ready]);
 
 
     return(

@@ -1,10 +1,12 @@
 import Api from "../../services/api";
 import {
+    ADDRESS_FAILURE,
+    ADDRESS_REQUESTING, ADDRESS_SUCCESS,
     BLOG_FAILURE,
     BLOG_REQUESTING,
     BLOG_SUCCESS, BRAND_FAILURE,
     BRAND_REQUESTING,
-    BRAND_SUCCESS,
+    BRAND_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS,
     PRODUCT_SWIPER_FAILURE,
     PRODUCT_SWIPER_REQUESTING,
     PRODUCT_SWIPER_SUCCESS,
@@ -12,6 +14,46 @@ import {
     SETTING_REQUESTING,
     SETTING_SUCCESS, SLIDER_FAILURE, SLIDER_REQUESTING, SLIDER_SUCCESS
 } from "../types";
+
+export function address() {
+
+    return function (dispatch) {
+
+        dispatch({ type: ADDRESS_REQUESTING });
+
+        try {
+            new Api().get('/address', {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: ADDRESS_SUCCESS, payload: response});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: ADDRESS_FAILURE, err: e });
+        }
+
+
+    }
+
+}
+
+export function card() {
+
+    return function (dispatch) {
+        dispatch({ type: CARD_REQUESTING });
+        try {
+            new Api().get('/card', {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: CARD_SUCCESS, payload: response});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: CARD_FAILURE, err: e });
+        }
+    }
+
+}
+
+
 
 export function setting() {
 
