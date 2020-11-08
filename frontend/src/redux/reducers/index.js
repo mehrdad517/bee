@@ -7,7 +7,7 @@ import brandReducers from './brand'
 import sliderReducers from './slider'
 import cardReducers from './card'
 import addressReducers from "./address";
-
+import regionReducers from './region'
 
 const rootReducer = combineReducers({
     authReducers,
@@ -17,7 +17,8 @@ const rootReducer = combineReducers({
     brandReducers,
     sliderReducers,
     cardReducers,
-    addressReducers
+    addressReducers,
+    regionReducers
 });
 
 export default rootReducer;

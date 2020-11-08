@@ -9,11 +9,35 @@ import {
     BRAND_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS,
     PRODUCT_SWIPER_FAILURE,
     PRODUCT_SWIPER_REQUESTING,
-    PRODUCT_SWIPER_SUCCESS,
+    PRODUCT_SWIPER_SUCCESS, REGION_FAILURE, REGION_REQUESTING, REGION_SUCCESS,
     SETTING_FAILURE,
     SETTING_REQUESTING,
     SETTING_SUCCESS, SLIDER_FAILURE, SLIDER_REQUESTING, SLIDER_SUCCESS
 } from "../types";
+
+
+export function region() {
+
+    return function (dispatch) {
+
+        dispatch({ type: REGION_REQUESTING });
+
+        try {
+            new Api().get('/region', {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: REGION_SUCCESS, payload: response});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: REGION_FAILURE, err: e });
+        }
+
+
+    }
+
+}
+
+
 
 export function address() {
 

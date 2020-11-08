@@ -1,7 +1,6 @@
 import React, {useEffect, memo, useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {toast} from "react-toastify";
-// @ts-ignore
 import Container from "@material-ui/core/Container";
 import {useHistory} from "react-router";
 import {Link} from "react-router-dom";
@@ -47,9 +46,12 @@ import Api from "../services/api";
 import {ADDRESS_REQUESTING, ADDRESS_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS} from "../redux/types";
 import Master from "../components/Layouts/master";
 import Basket from "../components/Basket";
-import {address, card} from "../redux/actions";
+import {address, card, region} from "../redux/actions";
 import './style.css'
 import isInt from "validator/es/lib/isInt";
+import Loading from "../components/Loading";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import App from "../App";
 
 export const Card = () => {
 
@@ -62,6 +64,24 @@ export const Card = () => {
     const [step, setStep] = useState(0);
     const [open, setOpen] = useState(false);
     const [address_id, setAddressID] = useState(false);
+    const [options, setOptions] = useState([]);
+
+    useEffect(() => {
+
+        if (open) {
+            dispatch(region());
+        }
+
+    }, [open]);
+
+    useEffect(() => {
+        if (AppState.regionReducers.ready === 'success') {
+            let n_options = [];
+            n_options[0] = AppState.regionReducers.data;
+            setOptions([...n_options]);
+        }
+
+    }, [AppState.regionReducers.ready]);
 
 
     useEffect(() => {
@@ -78,23 +98,6 @@ export const Card = () => {
 
     useEffect(() => {
 
-        if (step === 2) {
-            new Api().post('/order', {address_id}).then((response) => {
-                if (typeof response !== "undefined") {
-                    if (response.status) {
-                        if (response.id) {
-                            history.push('/invoice/' + response.id);
-                        }
-                    } else {
-                        toast.error(response.msg);
-                    }
-
-                }
-            }).then((err) => {
-                toast.error(err);
-            })
-        }
-
         setTimeout(() => {
             const element = document.querySelector('body');
             if (element) {
@@ -106,7 +109,7 @@ export const Card = () => {
 
 
     const removeAsCard = (id) => {
-        instance.delete('/card', id).then((resp) => {
+        instance.delete('/card/'+ id).then((resp) => {
             if (typeof resp != "undefined") {
                 if (resp.status) {
                     toast.success('با موفقیت از سبد خرید حذف گردید.');
@@ -291,9 +294,26 @@ export const Card = () => {
                     </Grid>
                 );
             case 2:
-            case 3:
-                return <div style={{ marginTop: '20px'}}>اطلاعات درگاه شما هنوز ثبت نشده است</div>;
+                return (
+                    <React.Fragment>
+                        <Loading/>
+                    </React.Fragment>
+                );
         }
+    };
+
+
+    const handleChanger = (event, value, index) => {
+
+        let n_options = options;
+        n_options.splice(index + 1);
+        setOptions([...n_options]);
+        if (value && value.children !== undefined && value.children.length > 0) {
+            n_options[index + 1] = value.children;
+            setOptions([...n_options]);
+        }
+
+
     };
 
     const AddAddress = () => {
@@ -317,19 +337,43 @@ export const Card = () => {
                                         variant="outlined"
                                         margin='dense'
                                         fullWidth
-                                        name='name'
+                                        name='main'
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={4}>
                                     <TextField
-                                        type='password'
+                                        type='text'
                                         label="کد پستی"
                                         variant="outlined"
                                         margin='dense'
                                         fullWidth
-                                        name='password'
+                                        name='postal_code'
                                     />
                                 </Grid>
+                                {options.map((item , index) => {
+                                    return(
+                                        <Grid item={true} xs={12} sm={4}>
+                                            <Autocomplete
+                                                onChange={((event, value) => handleChanger(event, value, index))}
+                                                options={item}
+                                                getOptionLabel={(option) => option.title}
+                                                renderInput={(params) =>
+                                                    <TextField
+                                                        {...params}
+                                                        fullWidth
+                                                        name='package_type_id'
+                                                        margin={"dense"}
+                                                        label="موقعیت"
+                                                        variant="outlined"
+                                                        InputLabelProps={{
+                                                            shrink: true,
+                                                        }}
+                                                    />
+                                                }
+                                            />
+                                        </Grid>
+                                    )
+                                })}
                             </Grid>
                         </fieldset>
                         <fieldset className='add-address-fieldset'>
@@ -342,7 +386,7 @@ export const Card = () => {
                                         margin='dense'
                                         fullWidth
                                         name='name'
-                                        // value={AppState.auth.data.user.name}
+                                        // value={AppState.authReducers.data.user.name}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} >
@@ -407,10 +451,32 @@ export const Card = () => {
                         </StepLabel>
                     </Step>
                 </Stepper>
+                <div style={{ minHeight: '300px'}}>
                 {switchStep()}
+                </div>
                 <div className={'stepper-btn'}>
                     {step > 0 && <Button startIcon={<ArrowForwardIcon />} onClick={() => setStep(step - 1)} variant={"contained"} color={"secondary"}>مرحله قبل</Button>}
-                    {step < 3 && <Button endIcon={<ArrowBackIcon />} onClick={() => setStep(step + 1)} variant={"contained"} color={"primary"}>مرحله بعدی</Button>}
+                    {step < 2 && <Button endIcon={<ArrowBackIcon />} onClick={() => {
+                        if (step === 0) {
+                            setStep(step + 1)
+                        } else {
+                            new Api().post('/order', {address_id}).then((response) => {
+                                if (typeof response !== "undefined") {
+                                    if (response.status) {
+                                        if (response.id) {
+                                            history.push('/invoice/' + response.id);
+                                            toast.success('فاکتور با موفقیت ایجاد گردید.');
+                                        }
+                                    } else {
+                                        toast.error(response.msg);
+                                    }
+
+                                }
+                            }).then((err) => {
+                                toast.error(err);
+                            })
+                        }
+                    } } variant={"contained"} color={"primary"}>مرحله بعدی</Button>}
                 </div>
             </> :  <Basket />}
         </div>
