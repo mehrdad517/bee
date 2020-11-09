@@ -15,8 +15,9 @@ import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { PersistGate } from 'redux-persist/integration/react'
 import configureStore  from './../src/redux/store'
-import Card from "./pages/card";
+import Card from "./pages/order/card";
 import Invoice from "./pages/order/invoice";
+import {Post} from "./pages/blog/post";
 
 const theme = createMuiTheme({
     direction: 'rtl',
@@ -56,6 +57,9 @@ function App() {
                                 <Master>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/card" component={Card} />
+                                    {/* blog and post   */}
+                                    <Route exact path="/blog/post/:id/:slug?" component={Post} />
+                                    <Route exact path="/page/:id" component={Post} />
                                 </Master>
                                 <NoMatch/>
                             </Switch>

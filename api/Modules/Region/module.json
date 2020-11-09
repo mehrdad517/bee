@@ -1,0 +1,13 @@
+{
+    "name": "Region",
+    "alias": "region",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Region\\Providers\\RegionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect, useDispatch, useSelector} from "react-redux";
 import Header from "../Header";
-import {setting} from "../../redux/actions";
+import {card, setting} from "../../redux/actions";
 import Footer from "../Footer";
 
 
@@ -13,10 +13,16 @@ const Master = (props) => {
     const  AppState  = useSelector(state => state);
 
     useEffect(() => {
-        if (AppState.settingReducers.ready !== 'success') {
+        if (AppState.setting.ready !== 'success') {
             dispatch(setting());
         }
-    }, [AppState.settingReducers.ready]);
+    }, [AppState.setting.ready]);
+
+    useEffect(() => {
+        if (AppState.card.ready !== 'success' && AppState.auth.login) {
+            dispatch(card());
+        }
+    }, [AppState.card.ready]);
 
 
     return(

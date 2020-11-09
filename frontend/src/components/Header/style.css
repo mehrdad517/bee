@@ -1,3 +1,33 @@
+.header-info {
+    background-color: var(--Dark-color);
+}
+.header-info-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--Primary-color);
+    padding: 8px 0;
+    font-size: 12.5px;
+    flex-wrap: wrap;
+}
+.header-info-inner p, ul {
+    padding: 0;
+    margin: 0;
+}
+.header-info-inner ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.header-info-inner ul li {
+    border-right: 1px solid var(--border);
+    padding: 0 7px;
+}
+.header-info-inner ul li:first-child {
+    border: 0;
+}
 .header-inner {
     display: flex;
     flex-direction: row;
@@ -43,7 +73,7 @@
     margin-right: 7px;
 }
 .Header {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 .Menubtn {
     background-color: var(--Primary-color) !important;
@@ -86,6 +116,8 @@
     position: relative;
     justify-content: space-between;
     height: 100%;
+    width: 50%;
+    align-items: center;
 }
 .Header-top-right-search {
     width:calc(30% - 48px);
@@ -98,11 +130,14 @@
     align-items: center;
     justify-content: center;
     width: 150px;
-    margin-left: -70px;
+}
+.HeadLogo a{
+    height: 50px;
+    width: 150px;
 }
 .HeadLogo img{
+    height: 100%;
     width: 100%;
-    height: 50px;
 }
 .HeadMenu{
     display: flex;
@@ -118,6 +153,11 @@
 .HeadProfile {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+.HeadProfile > div {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 .login-btn {
@@ -161,10 +201,7 @@
 
 @media all and (max-width: 990px){
     .Header{
-        margin-bottom: 10px;
-    }
-    .Header-top {
-        padding-bottom: 50px;
+        margin-bottom: 20px;
     }
     .Header-top-right-search {
         margin: 0;
@@ -174,27 +211,46 @@
     }
 }
 
+@media all and (min-width: 767px){
+    .HeadLogo a {
+        margin-left: -75px;
+    }
+
+
+}
+
 @media all and (max-width: 767px){
     .header-inner {
         flex-direction: column;
         justify-content: center;
     }
-
+    .HeadProfile {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .Header-top-right {
+        margin: 15px 0 40px 0;
+        width: 100%;
+    }
     .Header-top {
         padding-top: 5px;
-        padding-bottom: 60px;
     }
 
     .HeadLogo {
         justify-content: flex-end;
     }
-    .Menubtn span {
-        display: none;
-    }
+
 
 }
 
 @media all and (max-width: 600px){
+    .header-info-inner {
+        justify-content: flex-end;
+    }
+    .header-info p {
+        display: none;
+        flex-wrap: wrap;
+    }
     .shop-btn {
         padding: 10px 0;
     }
@@ -205,9 +261,6 @@
     }
     .login-btn-icon img{
         padding: 0 10px;
-    }
-    .Header{
-    //margin-bottom: 135px;
     }
     .Header-top-right-search {
         width:calc(100% - 32px);
@@ -220,7 +273,7 @@
         display: none;
     }
     .Header-top-right {
-        width: 145%;
+        width: 100%;
     }
     .login-btn {
         align-self: unset;
@@ -232,7 +285,7 @@
 }
 @media all and (max-width: 360px){
     .Header-top-right {
-        width: 130%;
+        width: 100%;
     }
     .shop-btn {
         padding: 10px 0;

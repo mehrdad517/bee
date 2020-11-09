@@ -6,7 +6,7 @@ import {
     BLOG_REQUESTING,
     BLOG_SUCCESS, BRAND_FAILURE,
     BRAND_REQUESTING,
-    BRAND_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS,
+    BRAND_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS, POST_FAILURE, POST_REQUESTING, POST_SUCCESS,
     PRODUCT_SWIPER_FAILURE,
     PRODUCT_SWIPER_REQUESTING,
     PRODUCT_SWIPER_SUCCESS, REGION_FAILURE, REGION_REQUESTING, REGION_SUCCESS,
@@ -14,6 +14,21 @@ import {
     SETTING_REQUESTING,
     SETTING_SUCCESS, SLIDER_FAILURE, SLIDER_REQUESTING, SLIDER_SUCCESS
 } from "../types";
+
+export function post(id) {
+    return function (dispatch) {
+        dispatch({ type: POST_REQUESTING });
+        try {
+            new Api().get('/blog/content/' + id, {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: POST_SUCCESS, payload: response, id: id});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: POST_FAILURE, err: e });
+        }
+    }
+}
 
 
 export function region() {

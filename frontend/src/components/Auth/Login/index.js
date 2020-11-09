@@ -25,7 +25,7 @@ const Login = memo((props) => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const { dialog }  = useSelector(state => state.authReducers);
+    const { dialog }  = useSelector(state => state.auth);
 
     const initStat = {
         username: '',
@@ -60,7 +60,7 @@ const Login = memo((props) => {
 
         setLoading(true);
 
-        new Api().post('/backend/auth/login', form).then((response) => {
+        new Api().post('/login', form).then((response) => {
             if (typeof response !== "undefined") {
                 if (response.status) {
                     setForm(initStat);

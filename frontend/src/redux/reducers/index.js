@@ -1,24 +1,26 @@
 import { combineReducers } from 'redux';
-import authReducers from './auth'
-import settingReducers from './setting'
-import blogReducers from './blog'
+import auth from './auth'
+import setting from './setting'
+import blog from './blog'
 import productSwiperReducers from "./productSwiper";
-import brandReducers from './brand'
-import sliderReducers from './slider'
-import cardReducers from './card'
-import addressReducers from "./address";
-import regionReducers from './region'
+import brand from './brand'
+import slider from './slider'
+import card from './card'
+import address from "./address";
+import region from './region'
+import post from './post'
 
 const rootReducer = combineReducers({
-    authReducers,
-    settingReducers,
-    blogReducers,
+    auth,
+    setting,
+    blog,
     productSwiperReducers,
-    brandReducers,
-    sliderReducers,
-    cardReducers,
-    addressReducers,
-    regionReducers
+    brand,
+    slider,
+    card,
+    address,
+    region,
+    post
 });
 
 export default rootReducer;

@@ -1,3 +1,5 @@
 .idea
 /user/src/env.js
 user/src/env.js
+frontend/node_modules
+/frontend/node_modules

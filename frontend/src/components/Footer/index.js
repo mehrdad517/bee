@@ -9,7 +9,7 @@ const Footer = () => {
 
     const [sub, setSub] = useState(500);
 
-    const { data } = useSelector(state => state.settingReducers);
+    const { data } = useSelector(state => state.setting);
 
     return (
         <div className="Footer">

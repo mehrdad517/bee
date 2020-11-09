@@ -1,0 +1,122 @@
+.table {
+    font-size: 13px;
+    text-align: center;
+    border-collapse: separate !important;
+    border-spacing: 0 10px;
+    width: 100%;
+    margin-top: 50px;
+}
+.table input{
+    text-align: center;
+}
+.table .MuiChip-root{
+    font-family: inherit !important;
+}
+.table thead tr{
+    background-color: transparent;
+    padding: 0;
+    border: 0
+}
+.table thead tr th{
+    cursor: pointer;
+    padding: 0;
+    border: 0
+}
+.table thead tr th svg{
+    position: relative;
+    top: 7px;
+}
+.table tbody tr {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 1px 2.5px 0 rgba(0,0,0,.15);
+    box-shadow: 0 1px 2.5px 0 rgba(0,0,0,.15);
+}
+.table tbody tr:hover {
+    -webkit-transition: .4s;
+    transition: .4s;
+    -webkit-box-shadow: 0 6px 15px rgba(0, 0, 0, .15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .15);
+    cursor: pointer;
+}
+.table tbody tr:hover {
+    background-color: #ffffff;
+}
+.table  td{
+    padding: 10px 0;
+}
+.table .p-heading{
+    color: var(--light);
+}
+.stepper-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.stepper-form {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.address-box {
+    border: 1px solid var(--border);
+    padding: 15px;
+    direction: rtl;
+    font-size: 14px;
+    background-color: white;
+    margin: 15px 0;
+    min-height: 300px;
+}
+.address-box-dashed {
+    border: 1px dashed var(--border);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 320px;
+}
+.address-box-inner {
+    min-height: 100px;
+    padding: 15px 0;
+}
+.address-box-header {
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.address-box-footer {
+    border-top: 1px dashed var(--border);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.address-box-inner-item {
+    padding: 5px 0;
+}
+.address-box-inner-item .value {
+    color: var(--Text-color)
+}
+.add-address fieldset.add-address-fieldset {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    margin-bottom: 25px;
+    padding: 15px;
+}
+.add-address legend.add-address-legend {
+    padding: 0 10px;
+    color: var(--Primary-color);
+}
+.card-product-img {
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    padding: 1px;
+}
+.p-title {
+    color: var(--Text-color) !important;
+}
+.p-heading {
+    color: #242222 !important;
+}

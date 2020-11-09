@@ -1,3 +1,7 @@
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
 .cart_factor{
     border-radius: 5px;
     background-color: white;
@@ -151,6 +155,9 @@
 .factor_table table tbody tr:nth-child(even) {
     background-color: #F7F9FB;
 }
+.factor_table table tbody tr:last-child td {
+    border-bottom: 1px solid black;
+}
 .factor_table table table {
     border: 1px solid black;
 }
@@ -173,6 +180,10 @@
     padding: 7px 30px;
     border-right: 1px solid black;
     border-left: 1px solid black;
+    border-bottom:  1px dashed rgba(0,0,0,.4);
+}
+.mini_table table thead th:last-child{
+    border-top: unset!important;
 }
 .mini_table table thead th:last-child{
     border-bottom: 1px solid black;
@@ -185,6 +196,12 @@
 .mini_table table tbody tr {
     display: flex;
     flex-direction: column;
+}
+.mini_table table tbody td {
+    border-bottom:  1px dashed rgba(0,0,0,.4);
+}
+.mini_table table tbody td:last-child {
+    border-top: unset!important;
 }
 .mini_table table tbody tr td {
     font-size: 14px;
@@ -206,6 +223,18 @@
     display: flex;
     margin-top: 35px;
     flex-wrap: wrap;
+}
+.canvas_img {
+    display: none;
+}
+.canvas_box canvas {
+    position: absolute;
+    opacity: .2;
+    display: flex;
+    align-items: center;
+    top: 142px;
+    transform: rotate(-15deg);
+    left: 15%;
 }
 @media all and (max-width: 959px) {
     .member_information_box > div {
@@ -230,6 +259,15 @@
 }
 
 @media all and (max-width: 600px){
+    .factor_header {
+        flex-direction: column;
+    }
+    .factor_header > div {
+        margin: 15px 0;
+    }
+    .factor_header > div:nth-child(2) {
+        margin-top: 0;
+    }
     .factor_table table {
         min-width: 1000px;
     }
@@ -240,6 +278,12 @@
     .mini_table table thead th {
         font-size: 12px;
         padding: 7px 20px;
+    }
+    .mini_table table thead  {
+        width: 100%;
+    }
+    .mini_table table   {
+        width: 100%;
     }
     .factor_header_left {
         display: none;

@@ -3,13 +3,15 @@ import { Helmet } from 'react-helmet';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import './style.css';
-import {ENV} from "../../config/env";
+import basketIcon from './../../assets/img/basket.png'
 
 
 const Basket = memo(() => {
+
+  const history = useHistory();
 
   return (
     <>
@@ -19,10 +21,8 @@ const Basket = memo(() => {
           <div className="NotFound">
             <h1>سبد خرید شما خالی است</h1>
             <h2>No Item!</h2>
-            <img style={{ width: '300px', height: '300px'}} src={(`${ENV.API['FETCH']}/static/img/basket.png`)} />
-            <Link to="/shop">
-              صفحه فروشگاه
-            </Link>
+            <img style={{ width: '300px', height: '300px'}} src={basketIcon} />
+            <Button onClick={() => history.push('/shop')} color={"primary"} variant={"outlined"}>  صفحه فروشگاه</Button>
           </div>
         </Grid>
       </Container>

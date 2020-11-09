@@ -16,7 +16,7 @@ const Home = () => {
     useEffect(() => {
 
 
-        if (AppState.brandReducers.ready !== 'success') {
+        if (AppState.brand.ready !== 'success') {
             dispatch(brand());
         }
 
@@ -24,11 +24,11 @@ const Home = () => {
             dispatch(productSwiper());
         }
 
-        if (AppState.blogReducers.ready !== 'success') {
+        if (AppState.blog.ready !== 'success') {
             dispatch(blog());
         }
 
-        if (AppState.sliderReducers.ready !== 'success') {
+        if (AppState.slider.ready !== 'success') {
             dispatch(slider());
         }
 
@@ -36,17 +36,17 @@ const Home = () => {
 
     const renderSlider = () => {
 
-        const request = AppState.sliderReducers;
+        const request = AppState.slider;
         if (!request || request.readyStatus === 'invalid' || request.readyStatus === 'request' || request.readyStatus === 'failure') {
             return null
         }
 
-        return <Slider list={AppState.sliderReducers.data}/>
+        return <Slider list={AppState.slider.data}/>
     }
 
     const renderBrand = () => {
 
-        const request = AppState.brandReducers;
+        const request = AppState.brand;
         if (!request || request.ready === 'invalid' || request.ready === 'request' || request.ready === 'failure') {
             return null
         }
@@ -67,7 +67,7 @@ const Home = () => {
 
     const renderBlog = () => {
 
-        const request = AppState.blogReducers;
+        const request = AppState.blog;
         if (!request || request.ready === 'invalid' || request.ready === 'request' || request.ready === 'failure') {
             return null
         }

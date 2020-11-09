@@ -8,28 +8,81 @@ import moment from "moment-jalaali";
 import Container from "@material-ui/core/Container";
 import Loading from "../../../components/Loading";
 import CurrencyFormat from "react-currency-format";
-
+import {useHistory} from "react-router";
+import {Link} from "react-router-dom";
+import {Box} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 const Invoice = (props) => {
 
     const { match } = props;
 
+    const history = useHistory();
 
-    const [invoice, setInvoice] = useState({});
-    const [loading, setLoadig] = useState(true);
+    const [invoice, setInvoice] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        let c = document.getElementById("canvas");
+        let ctx =c && c.getContext("2d");
+        if(ctx !== null){
+            ctx.canvas.width = 300;
+            ctx.canvas.height = 200;
+        }
+        let img = new Image();
+        img.src = paymentIcon;
+        ctx &&  ctx.drawImage(img, 0, 0);
+    }, [loading]);
+
+    useEffect(() => {
+
         new Api().get('/order/' + match.params.id).then((response) => {
             if (typeof response !== "undefined") {
                 if (response.status) {
                     setInvoice(response.order);
                 } else {
                     toast.error(response.msg);
+                    history.push('/card');
                 }
 
-                setLoadig(false);
+                setLoading(false);
             }
         })
     }, []);
+
+
+    const handlePayment = () => {
+
+        setLoading(true);
+
+        new Api().post(`/gateway`, {
+            "invoice_id": invoice.order_id,
+            "gateway": "pasargad",
+            "type": "order"
+        }).then((response) => {
+                if (typeof response !== "undefined") {
+                    if (response.status) {
+                        let form = document.createElement("form");
+                        form.method = response.payload.method;
+                        form.action = response.payload.action;
+                        response.payload.fields.map((item) => {
+                            let element1 = document.createElement("input");
+                            element1.value = item.value;
+                            element1.name = item.name;
+                            form.appendChild(element1);
+                        });
+                        document.body.appendChild(form);
+                        form.submit();
+                    } else {
+                        toast.error(response.msg);
+                    }
+
+                    setLoading(false)
+                }
+            })
+            .catch((err) => {
+                toast.error(err);
+            })
+    }
 
     if (loading) {
         return(
@@ -42,11 +95,16 @@ const Invoice = (props) => {
 
     return(
         <Container>
-            <div className={'factor_container'}>
+            {invoice && <div className={'factor_container'}>
+                {invoice.status === 1 && <div className="canvas_box">
+                    <canvas id="canvas"/>
+                </div>}
                 <div className={'cart_factor'}>
                     <div className={'factor_header'}>
                         <div className={'factor_header_left'}>
-                            <img src={logoIcon}/>
+                            <Link to={'/'}>
+                                <img src={logoIcon}/>
+                            </Link>
                         </div>
                         <div className={'factor_header_center'}>
                             <h1>بی نتورک</h1>
@@ -102,7 +160,7 @@ const Invoice = (props) => {
                                 <span className={'member_information_box_title'}>کد پستی</span>
                                 <span className={'points'}> : </span>
                                 <span
-                                    className={'member_information_box_value'}> {invoice && invoice.postal_code}  </span>
+                                    className={'member_information_box_value'}> {invoice && invoice.postal_code}</span>
                             </div>
                         </div>
 
@@ -111,11 +169,7 @@ const Invoice = (props) => {
                         <div>
                             <span>وضعیت پرداخت</span>
                             <span className={'points'}> : </span>
-                            {
-                                invoice && invoice.status === 0 ? <span className="red">پرداخت نشده</span> :
-                                    <span className="green">پرداخت شده</span>
-                            }
-
+                            {invoice.status !== 1 ? <span className="red">پرداخت نشده</span> : <span className="green">پرداخت شده</span>}
                         </div>
                     </div>
                     <div className={'factor_table'}>
@@ -169,8 +223,12 @@ const Invoice = (props) => {
                             </tbody>
                         </table>
                     </div>
+                    <Box mt={3} mb={3} className={'flex-space-between'}>
+                        {invoice.status === 0 && <Button disabled={loading} onClick={handlePayment} variant={"contained"} size={"large"} color={"secondary"}>پرداخت آنلاین</Button>}
+                        <Button onClick={() => history.push('/card')} variant={"contained"} size={"large"} color={"primary"}>انصراف و بازگشت</Button>
+                    </Box>
                 </div>
-            </div>
+            </div>}
         </Container>
 
     );
