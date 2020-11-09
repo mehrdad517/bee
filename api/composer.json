@@ -20,7 +20,8 @@
         "laravel/tinker": "^2.0",
         "monolog/monolog": "^2.1",
         "nwidart/laravel-modules": "^8.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "youthage/laravel-3des": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
