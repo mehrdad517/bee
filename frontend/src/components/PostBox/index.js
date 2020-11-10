@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment-jalaali';
 import {ENV} from "../../config/env";
 import './style.css'
+import logoIcon from './../../assets/img/logo-min.png'
 
 
 const PostBox = memo(({item}) => (
@@ -15,14 +16,12 @@ const PostBox = memo(({item}) => (
             <div className="news-item-head">
                 <h4>
                     <Link className="news-item-title"
-                          to={`/blog/post/${item.id}/${item.slug}`}
+                          to={`/post/${item.id}/${item.slug}`}
                     >
                         {item.title}
                     </Link>
                 </h4>
-                {item.img &&  (
-                    <img className="news-items-img" src={ENV.API.STORAGE + `/content/${item.id}/` + '/100/' + item.img}/>
-                )}
+                {item.img && <img className="news-items-img" src={ENV.API.STORAGE + `/content/${item.id}/` + '/100/' + item.img}/>}
             </div>
             <Grid spacing={3} container>
                 <ul>
@@ -41,7 +40,7 @@ const PostBox = memo(({item}) => (
             <p className='news-item-content' dangerouslySetInnerHTML={{ __html: item.content}} />
             <div className="Continues">
                 <Link
-                    to={`/blog/post/${item.id}/${item.slug}`}
+                    to={`/post/${item.id}/${item.slug}`}
                 >
                     ادامه مطلب
                 </Link>

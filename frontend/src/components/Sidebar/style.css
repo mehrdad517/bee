@@ -1,5 +1,5 @@
 .sidebar {
-    width: 260px;
+    width: 300px;
     padding: 0 20px;
     font-size: 14px;
 }
@@ -12,7 +12,8 @@
     padding: 20px 0;
 }
 .sidebar .sidebar-logo img{
-    width: 100%;
+    width: 120px;
+    height: 200px;
 }
 .sidebar ol {
     padding: 0 5px;

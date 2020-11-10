@@ -53,7 +53,8 @@ Route::prefix('/')->middleware('access')->group(function () {
             \Cache::tags(['menu'])->put('menu', [
                 'product_categories' => \Modules\Product\Entities\Category::where('status', 1)->where('deleted', 0)->get()->toTree(),
                 'menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'header'])->get()->toTree(),
-                'footer_menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'footer'])->get()->toTree()
+                'footer_menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'footer'])->get()->toTree(),
+                'blog_categories' => Category::where('status', 1)->where('deleted', 0)->get()->toTree()
             ], 24 * 60);
 
         }
@@ -260,8 +261,6 @@ Route::prefix('/')->middleware('access')->group(function () {
         }
     });
 
-
-
     Route::get('/brand', function () {
 
         if (!\Cache::tags(['brand'])->has("brand")) {
@@ -443,6 +442,19 @@ Route::prefix('/')->middleware('access')->group(function () {
 
 
             return response(\Cache::tags(['blog', 'content_id'])->get("content[$id]"));
+        });
+
+        Route::get('/categories', function () {
+
+            if (!\Cache::tags(['blog', 'blog_categories'])->has('blog_categories')) {
+
+                \Cache::tags(['blog','blog_categories'])->put('blog_categories', [
+                    'blog_categories' => Category::where('status', 1)->where('deleted', 0)->get()->toTree(),
+                ], 24 * 60);
+
+            }
+
+            return response(\Cache::tags(['blog','blog_categories'])->get('blog_categories'));
         });
 
 

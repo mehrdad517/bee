@@ -17,30 +17,30 @@ const Master = (props) => {
     const  AppState  = useSelector(state => state);
 
 
-    useEffect(() => {
-        if (AppState.menu.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
-            dispatch(menu());
-        }
-    }, [AppState.menu.ready]);
-
 
     useEffect(() => {
-        if (AppState.setting.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
-            dispatch(setting());
-        }
-    }, [AppState.setting.ready]);
 
-    useEffect(() => {
         if (AppState.card.ready !== 'success' && AppState.auth.login) {
             dispatch(card());
         }
-    }, [AppState.card.ready]);
+
+        if (AppState.setting.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
+            dispatch(setting());
+        }
+
+        if (AppState.menu.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
+            dispatch(menu());
+        }
+
+
+    }, []);
+
 
 
     return(
         <div className={'master'}>
             <Header />
-            <div className={'master-inner'}>
+            <div className={'master-inner'} style={{ minHeight: 500}}>
                 {children}
             </div>
             <Footer/>

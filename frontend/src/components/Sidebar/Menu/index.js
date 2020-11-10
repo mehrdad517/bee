@@ -13,7 +13,7 @@ import {
     MENU_CHANGE_CATEGORY_EXPANDED,
     MENU_CHANGE_MENU_EXPANDED, MENU_DRAWER
 } from "../../../redux/types";
-import logo from './../../../assets/img/logo-min.png'
+import logo from './../../../assets/img/logo_v.png'
 
 
 export const SidebarMenu = () => {
@@ -265,7 +265,6 @@ export const SidebarMenu = () => {
                                 MENU.data.product_categories
                             )}
                         </div>
-                        <Divider />
                     </>
                 )}
             </>

@@ -250,6 +250,9 @@ ul.contact li span {
     }
 }
 @media only screen and (max-width: 768px) {
+    .FooterParagraph {
+        display: none;
+    }
     .networkImg > img {
         margin-left: 30px;
     }

@@ -1,0 +1,45 @@
+.blog_categories_container {
+    padding: 25px;
+    margin-top: 10px;
+}
+.menu-container {
+    padding: 20px 0;
+}
+ul.menu-container li {
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+ul.menu-container li img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+ul.menu-container li a {
+    margin-left: 10px;
+    color: var(--title);
+}
+.tree-box {
+    margin: 10px 0px 10px 0;
+}
+.tree-parent {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.tree-parent span{
+    display: flex;
+    align-items: center;
+}
+.tree-box .has-no-child {
+    padding-right: 18px;
+}
+.tree-box a {
+    padding-right: 5px;
+    color: var(--title);
+}
+.tree-children {
+    padding-right: 10px;
+    padding-top:  5px;
+}

@@ -18,6 +18,7 @@ import configureStore  from './../src/redux/store'
 import Card from "./pages/order/card";
 import Invoice from "./pages/order/invoice";
 import {Post} from "./pages/blog/post";
+import {Blog} from "./pages/blog";
 
 const theme = createMuiTheme({
     direction: 'rtl',
@@ -58,7 +59,8 @@ function App() {
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/card" component={Card} />
                                     {/* blog and post   */}
-                                    <Route exact path="/blog/post/:id/:slug?" component={Post} />
+                                    <Route exact path="/blog" component={Blog} />
+                                    <Route exact path="/post/:id/:slug?" component={Post} />
                                     <Route exact path="/page/:id" component={Post} />
                                 </Master>
                                 <NoMatch/>
