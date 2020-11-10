@@ -63,7 +63,6 @@ function App() {
                                 </Master>
                                 <NoMatch/>
                             </Switch>
-                            <Login />
                         </Router>
                     </MuiThemeProvider>
                 </StylesProvider>

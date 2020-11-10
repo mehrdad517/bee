@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7e6ee3bd1228dc1f431cbcf5a81f025",
+    "content-hash": "235ac571e8fde7f78cd06a13c5315d82",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5899,56 +5899,6 @@
                 }
             ],
             "time": "2020-11-08T21:15:15+00:00"
-        },
-        {
-            "name": "youthage/laravel-3des",
-            "version": "4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/heyhip/Laravel-3DES.git",
-                "reference": "ff0d556106d353b335d1ae871091a189814fe2c1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/heyhip/Laravel-3DES/zipball/ff0d556106d353b335d1ae871091a189814fe2c1",
-                "reference": "ff0d556106d353b335d1ae871091a189814fe2c1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "laraveldes3\\Des3Provider"
-                    ],
-                    "aliases": {
-                        "DES3": "laraveldes3\\Des3Facade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "laraveldes3\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "YouthAge",
-                    "email": "myouthage@gmail.com"
-                }
-            ],
-            "description": "Laravel Des3 encode",
-            "support": {
-                "issues": "https://github.com/heyhip/Laravel-3DES/issues",
-                "source": "https://github.com/heyhip/Laravel-3DES/tree/4.0"
-            },
-            "time": "2019-03-14T15:52:27+00:00"
         }
     ],
     "packages-dev": [

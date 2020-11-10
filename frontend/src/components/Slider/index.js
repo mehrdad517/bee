@@ -37,7 +37,7 @@ const Slider = memo(({ list }) => (
                     );
                 }  else {
                     return (
-                        <div style={{ height: '450px', borderRadius: '10px' }} key={index}>
+                        <div style={{ height: '500px', borderRadius: '10px' }} key={index}>
                             {item.link ? <a href={item.link}><img alt={item.caption} src={item.prefix + '/' + item.file}/></a> : <img alt={item.caption} src={item.prefix + '/' + item.file}/>}
                         </div>
                     );

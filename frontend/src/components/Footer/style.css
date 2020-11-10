@@ -1,6 +1,6 @@
 .Footer {
     background-color: #263239;
-    margin-top: 40px;
+    margin-top: 70px;
     padding: 20px 0 0 0;
     color: #d3d3d3;
 }
@@ -18,7 +18,7 @@
 }
 .Footer h4 {
     font-size: 14px;
-    color: var(--Success-color);
+    color: var(--Primary-color);
 }
 .FooterParagraph {
     text-align: justify;

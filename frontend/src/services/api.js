@@ -7,7 +7,7 @@ let CryptoJS = require("crypto-js");
 
 class Api {
 
-    headers() {
+    _headers() {
 
         let token = '';
 
@@ -23,7 +23,7 @@ class Api {
     }
 
     // check response after receive
-    dispatchResponse(response) {
+    _dispatchResponse(response) {
         if (typeof response !== 'undefined') {
             if (response.status === 401) {
                 toast.error('مجددا وارد شوید.');
@@ -38,6 +38,27 @@ class Api {
         }
     }
 
+    _makeRequest(object) {
+
+        let n_object = 'origin:' + window.location.host;
+
+        let keys = Object.keys(object);
+
+        keys.forEach((item) => {
+            n_object += ";" + item + ':' + object[item]
+        })
+
+        let key = CryptoJS.enc.Hex.parse("c0ff70cc197a07dff1fb709688170426");
+        let iv = CryptoJS.enc.Hex.parse("f8b4e45085a1045902c3c69c80e67a7c");
+
+        let encrypted = CryptoJS.AES.encrypt(n_object, key, {
+            iv,
+            padding: CryptoJS.pad.ZeroPadding,
+        });
+
+        return encrypted.toString();
+    }
+
     /**
      * ---------------------------------------------------------------
      *  GET POST PUT DELETE API
@@ -45,43 +66,43 @@ class Api {
      */
     get(url, object= {}) {
         return axios.get( ENV.API[window.location.host]+ `${url}`, {
-            headers: this.headers(),
-            params: object
+            headers: this._headers(),
+            params: {'request' : this._makeRequest(object)}
         }).then( (response) => {
             return response.data;
         }).catch((error) => {
-            return this.dispatchResponse(error.response)
+            return this._dispatchResponse(error.response)
         })
     }
 
     post(url, object= {}) {
-        return axios.post( ENV.API[window.location.host]+ `${url}`, object, {
-            headers: this.headers(),
+        return axios.post( ENV.API[window.location.host]+ `${url}`, {'request' : this._makeRequest(object)}, {
+            headers: this._headers(),
         }).then( (response) => {
             return response.data;
         }).catch((error) => {
-            return this.dispatchResponse(error.response)
+            return this._dispatchResponse(error.response)
         })
     }
 
     put(url, object={}) {
-        return axios.put( ENV.API[window.location.host]+ `${url}`,  object,{
-            headers: this.headers(),
+        return axios.put( ENV.API[window.location.host]+ `${url}`,  {'request' : this._makeRequest(object)},{
+            headers: this._headers(),
         }).then( (response) => {
             return response.data;
         }).catch((error) => {
-            return this.dispatchResponse(error.response)
+            return this._dispatchResponse(error.response)
         })
     }
 
     delete(url, object) {
         return axios.delete( ENV.API[window.location.host]+ `${url}`, {
-            params : object,
-            headers: this.headers(),
+            params : {'request' : this._makeRequest(object)},
+            headers: this._headers(),
         }).then((response) => {
             return response.data;
         }).catch((error) => {
-            return this.dispatchResponse(error.response)
+            return this._dispatchResponse(error.response)
         })
     }
 
@@ -92,7 +113,7 @@ class Api {
         }).then( (response) => {
             return response.data;
         }).catch((error) => {
-            return this.dispatchResponse(error.response)
+            return this._dispatchResponse(error.response)
         })
     }
 

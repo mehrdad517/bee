@@ -1,19 +1,49 @@
 import Api from "../../services/api";
 import {
     ADDRESS_FAILURE,
-    ADDRESS_REQUESTING, ADDRESS_SUCCESS,
+    ADDRESS_REQUESTING,
+    ADDRESS_SUCCESS,
     BLOG_FAILURE,
     BLOG_REQUESTING,
-    BLOG_SUCCESS, BRAND_FAILURE,
+    BLOG_SUCCESS,
+    BRAND_FAILURE,
     BRAND_REQUESTING,
-    BRAND_SUCCESS, CARD_FAILURE, CARD_REQUESTING, CARD_SUCCESS, POST_FAILURE, POST_REQUESTING, POST_SUCCESS,
+    BRAND_SUCCESS,
+    CARD_FAILURE,
+    CARD_REQUESTING,
+    CARD_SUCCESS, MENU_FAILURE,
+    MENU_REQUESTING, MENU_SUCCESS,
+    POST_FAILURE,
+    POST_REQUESTING,
+    POST_SUCCESS,
     PRODUCT_SWIPER_FAILURE,
     PRODUCT_SWIPER_REQUESTING,
-    PRODUCT_SWIPER_SUCCESS, REGION_FAILURE, REGION_REQUESTING, REGION_SUCCESS,
+    PRODUCT_SWIPER_SUCCESS,
+    REGION_FAILURE,
+    REGION_REQUESTING,
+    REGION_SUCCESS,
     SETTING_FAILURE,
     SETTING_REQUESTING,
-    SETTING_SUCCESS, SLIDER_FAILURE, SLIDER_REQUESTING, SLIDER_SUCCESS
+    SETTING_SUCCESS,
+    SLIDER_FAILURE,
+    SLIDER_REQUESTING,
+    SLIDER_SUCCESS
 } from "../types";
+
+export function menu() {
+    return function (dispatch) {
+        dispatch({ type: MENU_REQUESTING });
+        try {
+            new Api().get('/menu', {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: MENU_SUCCESS, payload: response});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: MENU_FAILURE, err: e });
+        }
+    }
+}
 
 export function post(id) {
     return function (dispatch) {

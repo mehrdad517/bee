@@ -1,11 +1,12 @@
-
 // Export for unit testing
 import {SETTING_FAILURE, SETTING_REQUESTING, SETTING_SUCCESS} from "../types";
+import moment from "moment-jalaali";
 
 export const initialState =  {
     ready: 'invalid',
     err: null,
-    data: {}
+    data: {},
+    expiration: moment.unix()
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ready: 'success',
+                expiration: moment().add(1, 'hours').unix(),
                 data: action.payload
             };
         case SETTING_FAILURE:

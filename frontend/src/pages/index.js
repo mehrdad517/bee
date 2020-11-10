@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import ProductSwiper from "../components/ProductSwiper";
 import Brand from "../components/BrandSwiper";
 import Slider from "../components/Slider";
+import moment from "moment-jalaali";
 const Home = () => {
 
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Home = () => {
     useEffect(() => {
 
 
-        if (AppState.brand.ready !== 'success') {
+        if (AppState.brand.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
             dispatch(brand());
         }
 
@@ -24,11 +25,12 @@ const Home = () => {
             dispatch(productSwiper());
         }
 
-        if (AppState.blog.ready !== 'success') {
+
+        if (AppState.blog.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
             dispatch(blog());
         }
 
-        if (AppState.slider.ready !== 'success') {
+        if (AppState.slider.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
             dispatch(slider());
         }
 

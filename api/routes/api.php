@@ -23,8 +23,56 @@ use Illuminate\Support\Facades\Auth;
 | frontend api
 |
  */
-Route::group(['prefix' => '/'], function () {
+Route::prefix('/')->middleware('access')->group(function () {
 
+    Route::get('/setting', function (Request $request) {
+
+        if (!\Cache::tags(['setting'])->has('setting')) {
+
+            $domain = \Modules\Setting\Entities\Domain::with(['links' => function($q) {
+                $q->select('id', 'title', 'value', 'type');
+            }])->where('status', 1)->first();
+
+
+            $domain->introduce = strip_tags($domain->introduce);
+
+
+            \Cache::tags(['setting'])->put('setting', $domain , 24 * 60);
+
+
+        }
+
+        return response(\Cache::tags(['setting'])->get('setting'));
+
+    });
+
+    Route::get('/menu', function (Request $request) {
+
+        if (!\Cache::tags(['menu'])->has('menu')) {
+
+            \Cache::tags(['menu'])->put('menu', [
+                'product_categories' => \Modules\Product\Entities\Category::where('status', 1)->where('deleted', 0)->get()->toTree(),
+                'menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'header'])->get()->toTree(),
+                'footer_menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'footer'])->get()->toTree()
+            ], 24 * 60);
+
+        }
+
+        return response(\Cache::tags(['menu'])->get('menu'));
+
+    });
+
+    Route::get('/slider', function () {
+
+        if (!\Cache::tags(['slider'])->has('slider')) {
+
+            $result = \Illuminate\Support\Facades\DB::select('call sp_slider');
+
+            \Cache::tags(['slider'])->put('slider', $result, 24 * 60);
+        }
+
+        return response(\Cache::tags(['slider'])->get('slider'));
+    });
 
     Route::get('/search', function (Request $request) {
 
@@ -212,106 +260,7 @@ Route::group(['prefix' => '/'], function () {
         }
     });
 
-    Route::get('/menu', function (Request $request) {
 
-
-        if (!\Cache::has('menu')) {
-
-            $product_categories = \Modules\Product\Entities\Category::where('status', 1)->where('deleted', 0)->get()->toTree();
-
-            $blog_categories = Category::where('status', 1)->where('deleted', 0)->get()->toTree();
-
-
-
-            \Cache::put('menu', [
-                'blog_categories' => $blog_categories,
-                'product_categories' => $product_categories,
-                'menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'header'])->get()->toTree(),
-                'footer_menu' => \Modules\Blog\Entities\Menu::where('status', 1)->where('deleted', 0)->where(['type' => 'footer'])->get()->toTree()
-            ], 24 * 60);
-
-
-        }
-
-        return response(\Cache::get('menu'));
-
-    });
-
-    Route::get('/setting', function (Request $request) {
-
-//
-//
-//        $key = base64_decode("56105610");
-//
-//        $iv = base64_decode("p/34qWLcYcg=");
-//        $data = "test";
-//        $cipher='DES-CBC';
-//        $encrypted = openssl_encrypt($data,$cipher, $key,OPENSSL_RAW_DATA,$iv);
-//
-//        echo base64_encode($encrypted);
-//
-//        dd(openssl_decrypt($encrypted, $cipher, $key,OPENSSL_RAW_DATA,$iv));
-//
-//
-//
-//        $key = '56105610';
-//        $key = pack('H*',$key);
-//
-//// DATA
-//        $data = "U2FsdGVkX1+3MWF67rO6+1cCD61o1WY5";
-//        $data = pack('H'.strlen($key),$data);
-//
-//// DECRYPT OPEN SSL
-//        $result = openssl_decrypt($data,'des-ede', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
-//        dd($result);
-////        dd(openssl_get_cipher_methods());
-//
-//        $plaintext = 'mehrdad';
-//        $cipher = "des-ede";
-//        if (in_array($cipher, openssl_get_cipher_methods()))
-//        {
-//            $ivlen = openssl_cipher_iv_length($cipher);
-//            $iv = openssl_random_pseudo_bytes($ivlen);
-//            $ciphertext = openssl_encrypt($plaintext, $cipher, '56105610', $options=0, $iv, $tag);
-//            echo $ciphertext;
-//            //store $cipher, $iv, and $tag for decryption later
-//            $original_plaintext = openssl_decrypt($ciphertext, $cipher, '56105610', $options=0, $iv, $tag);
-//            echo $original_plaintext."\n";
-//        }
-//
-//        dd('xxx');
-
-
-        if (!\Cache::tags(['setting'])->has('setting')) {
-
-            $domain = \Modules\Setting\Entities\Domain::with(['links' => function($q) {
-                $q->select('id', 'title', 'value', 'type');
-            }])->where('status', 1)->first();
-
-
-            $domain->introduce = strip_tags($domain->introduce);
-
-
-            \Cache::tags(['setting'])->put('setting', $domain , 24 * 60);
-
-
-        }
-
-        return response(\Cache::tags(['setting'])->get('setting'));
-
-    });
-
-    Route::get('/slider', function () {
-
-        if (!\Cache::tags(['slider'])->has('slider')) {
-
-            $result = \Illuminate\Support\Facades\DB::select('call sp_slider');
-
-            \Cache::tags(['slider'])->put('slider', $result, 24 * 60);
-        }
-
-        return response(\Cache::tags(['slider'])->get('slider'));
-    });
 
     Route::get('/brand', function () {
 

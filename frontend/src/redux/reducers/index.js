@@ -9,6 +9,7 @@ import card from './card'
 import address from "./address";
 import region from './region'
 import post from './post'
+import menu from './menu'
 
 const rootReducer = combineReducers({
     auth,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     card,
     address,
     region,
-    post
+    post,
+    menu,
 });
 
 export default rootReducer;

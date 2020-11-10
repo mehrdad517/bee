@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
 import {connect, useDispatch, useSelector} from "react-redux";
 import Header from "../Header";
-import {card, setting} from "../../redux/actions";
+import {card, menu, setting} from "../../redux/actions";
 import Footer from "../Footer";
-import Api from "../../services/api";
-let CryptoJS = require("crypto-js");
+import moment from "moment-jalaali";
+import Login from "../Auth/Login";
+import Drawer from '@material-ui/core/Drawer';
+import {MENU_DRAWER} from "../../redux/types";
+import Sidebar from "../Sidebar";
 
 const Master = (props) => {
 
@@ -13,26 +16,16 @@ const Master = (props) => {
     const dispatch = useDispatch();
     const  AppState  = useSelector(state => state);
 
-    useEffect(() => {
-
-        // let data = "test"
-        // let key = "56105610"
-        // let IV = "p/34qWLcYcg="
-        // let cipher = CryptoJS.TripleDES.encrypt(data, CryptoJS.enc.Utf8.parse(key), {
-        //     iv: CryptoJS.enc.Utf8.parse(IV),
-        //     mode: CryptoJS.mode.CBC
-        // });
-        //
-        // console.log(cipher.toString())
-        //
-        // new Api().get('/setting', {rq: CryptoJS.DES.encrypt('mehrdad', '56105610',).toString()}).then((response) => {
-        //     console.log(response)
-        //
-        // })
-    }, []);
 
     useEffect(() => {
-        if (AppState.setting.ready !== 'success') {
+        if (AppState.menu.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
+            dispatch(menu());
+        }
+    }, [AppState.menu.ready]);
+
+
+    useEffect(() => {
+        if (AppState.setting.ready !== 'success' || moment.unix() > AppState.setting.expiration) {
             dispatch(setting());
         }
     }, [AppState.setting.ready]);
@@ -51,6 +44,10 @@ const Master = (props) => {
                 {children}
             </div>
             <Footer/>
+            <Login />
+            <Drawer open={AppState.menu.drawer} onClose={() => dispatch({type: MENU_DRAWER, payload: false})}>
+                <Sidebar />
+            </Drawer>
         </div>
     );
 }

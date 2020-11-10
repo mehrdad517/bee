@@ -1,11 +1,13 @@
 
 // Export for unit testing
 import {SLIDER_FAILURE, SLIDER_REQUESTING, SLIDER_SUCCESS} from "../types";
+import moment from "moment-jalaali";
 
 export const initialState = {
     ready: 'invalid',
     err: null,
-    data: []
+    data: [],
+    expiration: moment.unix()
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +21,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ready: 'success',
-                data: action.payload
+                data: action.payload,
+                expiration: moment().add(1, 'hours').unix(),
             };
         case SLIDER_FAILURE:
             return {

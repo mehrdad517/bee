@@ -3,7 +3,7 @@ import Swiper from 'react-id-swiper';
 import 'swiper/swiper-bundle.css'
 import './style.css'
 import Line from "../Line";
-
+import brandIcon from './../../assets/img/fresh.png'
 const params = {
     spaceBetween: 0,
     breakpoints: {
@@ -56,7 +56,7 @@ const Brand = memo(({lists}) => (
                                     <div className='mini_box_title'>{brand.title.substr(0,25)}</div>
                                 </div>
                                 <div className='mini_box_image'>
-                                    <img src={"http://api.digiattar.com/storage/product/638/200/5f840413ceb6c.jpeg"}/>
+                                    <img src={brandIcon}/>
                                 </div>
                             </div>
                         </div>

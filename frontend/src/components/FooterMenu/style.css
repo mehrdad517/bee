@@ -1,0 +1,48 @@
+.footer-menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer-menu a {
+  color: inherit;
+}
+.footer-menu > .tree-box {
+  flex-basis: 30%;
+}
+
+.footer-menu > .tree-box {
+  font-size: 14px;
+}
+.tree-box {
+  margin: 10px 0px 10px 0;
+}
+.tree-parent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.tree-parent span{
+  display: flex;
+  font-weight: bold;
+  color: var(--Primary-color);
+  align-items: center;
+}
+.tree-box .has-no-child {
+  padding-right: 18px;
+}
+.tree-box a {
+  padding-right: 5px;
+  color: var(--title);
+}
+.tree-children {
+  padding-right: 10px;
+  padding-top:  5px;
+}
+
+@media only screen and (max-width: 768px) {
+  .footer-menu > .tree-box {
+    flex-basis: 45%;
+    margin-bottom: 20px;
+  }
+}

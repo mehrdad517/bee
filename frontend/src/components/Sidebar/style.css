@@ -1,0 +1,44 @@
+.sidebar {
+    width: 260px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+.sidebar .MuiSvgIcon-fontSizeSmall {
+    font-size: 1rem;
+}
+.sidebar .sidebar-logo {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+.sidebar .sidebar-logo img{
+    width: 100%;
+}
+.sidebar ol {
+    padding: 0 5px;
+}
+.sidebar li span.rct-text {
+    margin-bottom: 20px;
+}
+.sidebar li ol li {
+    padding: 0px 20px 0 0;
+    width: 100%;
+}
+.sidebar .rct-node-icon {
+    width: 0;
+    padding: 0;
+}
+.sidebar .rct-title {
+    font-size: 17px;
+    font-weight: normal;
+}
+.sidebar .rct-collapse {
+    padding: 0 2.5px;
+}
+.sidebar .rct-checkbox {
+    padding: 0;
+}
+.sidebar .rct-node-clickable:hover, .rct-node-clickable:focus {
+    background-color: transparent;
+    color: #999999;
+}

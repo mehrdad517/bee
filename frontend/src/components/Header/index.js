@@ -3,26 +3,15 @@ import {
     Container,
     Grid,
 } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import Badge from '@material-ui/core/Badge';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import IconButton from '@material-ui/core/IconButton';
 import {Link, useHistory} from 'react-router-dom';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import './style.css'
-import Backdrop from '@material-ui/core/Backdrop';
 import {connect, useDispatch, useSelector} from "react-redux";
-import Fade from "@material-ui/core/Fade";
-import {isBrowser, isMobile, isMobileOnly} from "react-device-detect";
 import accountIcon from './../../assets/img/account.png'
 import cartIcon from './../../assets/img/cart.png'
 import searchIcon from './../../assets/img/search.png'
 import logo from './../../assets/img/logo-min.png'
-import {AUTH_DIALOG} from "../../redux/types";
-import App from "../../App";
+import {AUTH_DIALOG, MENU_DRAWER} from "../../redux/types";
+
 
 const Header = () => {
 
@@ -38,8 +27,9 @@ const Header = () => {
                 <div className={'header-info'}>
                     <Container>
                         <div className={'header-info-inner'}>
-                            <p>بی نتورک, بهترین انتخاب استثنایی به شباهت زنبور</p>
+                            <p>تهران، ستارخان، بعد از فلکه اول صادقیه، پلاک 621، طبقه سوم</p>
                             <ul>
+                                <li>09371043866</li>
                                 <li>021-44900500</li>
                                 <li>Info@bee.ir</li>
                             </ul>
@@ -52,7 +42,7 @@ const Header = () => {
                             <div className="Header-top-right">
                                 <div className="HeadMenu">
                                     <div className="Menu">
-                                        <div className="Menubtn" >
+                                        <div className="Menubtn" onClick={() => dispatch({type: MENU_DRAWER, payload: true})}>
                                             <span>منوی سایت</span>
                                             <img src={(AppState.setting.data.backend + '/static/img/menu.png')}/>
                                         </div>

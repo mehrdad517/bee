@@ -4,6 +4,7 @@ import {Grid} from "@material-ui/core";
 import Container from '@material-ui/core/Container';
 import {Link} from "react-router-dom";
 import  './style.css'
+import {FooterMenu} from "../FooterMenu";
 
 const Footer = () => {
 
@@ -41,7 +42,7 @@ const Footer = () => {
                 </Grid>
                 <Grid style={{ marginTop: '5px' }} container spacing={5}>
                     <Grid item lg={6} md={6} sm={12} xs={12}>
-                        {/*<FooterMenu />*/}
+                        <FooterMenu />
                     </Grid>
                     <Grid item lg={4} md={4} sm={6} xs={12}>
                         <h4>پل های ارتباطی</h4>
