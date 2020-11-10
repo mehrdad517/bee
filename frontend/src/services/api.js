@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie/lib';
 import {ENV} from "../config/env";
 
+let CryptoJS = require("crypto-js");
+
 class Api {
 
     headers() {
