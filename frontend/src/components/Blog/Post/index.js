@@ -33,6 +33,13 @@ const PostPage = (props) => {
                     <Link color="inherit" to="/blog">
                         وبلاگ
                     </Link>
+                    {item.categories && item.categories.length > 0 && item.categories.map((category, index) => {
+                        return(
+                            <Link color="inherit" to={`/blog/${category.id}/${category.slug}`}>
+                                {category.title}
+                            </Link>
+                        )
+                    })}
                     <b>{item.title}</b>
                 </Breadcrumbs>
             </Paper>
@@ -82,9 +89,11 @@ const PostPage = (props) => {
                                 <div key={index}>
                                     {category.contents && (
                                         <div key={index} className="suggested-articles">
-                                            <h5 className="suggested-articles-title">
-                                                {category.title}
-                                            </h5>
+                                            <Link to={`/blog/${category.id}/${category.slug}`}>
+                                                <h5 className="suggested-articles-title">
+                                                    {category.title}
+                                                </h5>
+                                            </Link>
                                             <ul className="suggested-articles-list">
                                                 {category.contents.map((content, index) => {
                                                     return (
@@ -132,7 +141,7 @@ const PostPage = (props) => {
                                             <li key={index}>
                                                 <Chip
                                                     component={Link}
-                                                    to={`/blog/tag/${tag.id}/${tag.name.replace(/\s+/g, '-')}`}
+                                                    to={`/tag/${tag.id}/${tag.name.replace(/\s+/g, '-')}`}
                                                     variant="outlined"
                                                     color="primary"
                                                     clickable

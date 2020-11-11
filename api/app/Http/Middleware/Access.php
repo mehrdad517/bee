@@ -62,7 +62,7 @@ class Access
 
 
         if ($request->get('origin') != 'localhost') {
-            $msg = 'درخواست نامعتبر 1';
+            $msg = 'invalid request';
             return response(['status' => false, 'msg' => $msg], 400);
         }
 

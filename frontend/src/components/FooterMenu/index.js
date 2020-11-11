@@ -60,7 +60,7 @@ export const FooterMenu = () => {
       const { title } = item;
 
       // slug
-      const slug = item.slug;
+      const slug = item.title.replace(/\s+/g, '-');
 
       // external link
       const external_link =

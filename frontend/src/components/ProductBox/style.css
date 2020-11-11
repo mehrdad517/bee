@@ -76,25 +76,27 @@
     cursor: pointer;
 }
 
-
-
-
-.swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after {
-    content: 'next';
+.swiper-button-prev ,.swiper-button-next{
     background-color: black;
-    height: 20px;
-    width: 20px;
     color: white;
-    display: -moz-box;
-    display: flex;
-    -moz-box-align: center;
-    align-items: center;
-    -moz-box-pack: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: bolder;
     border-radius: 5px;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.09);
+    height: 25px!important;
+}
+.swiper-container-rtl .swiper-button-prev:after  {
+    font-size: 15px;
+    color: white;
+}
+.swiper-container-rtl .swiper-button-next:after {
+    content: 'prev';
+    font-size: 15px;
+    color: white;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+    background-color: #1a202c;
+    padding: 3px;
+}
+.swiper-pagination-bullet-active {
+    background: var(--Primary-color)!important;
 }
 
 

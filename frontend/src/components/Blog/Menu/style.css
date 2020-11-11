@@ -1,6 +1,8 @@
 .blog_categories_container {
     padding: 25px;
     margin-top: 10px;
+    position: sticky;
+    top: 10px;
 }
 .menu-container {
     padding: 20px 0;

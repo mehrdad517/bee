@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie/lib';
 import {ENV} from "../config/env";
-
+import moment from "moment-jalaali";
 let CryptoJS = require("crypto-js");
 
 class Api {
@@ -40,7 +40,7 @@ class Api {
 
     _makeRequest(object) {
 
-        let n_object = 'origin:' + window.location.host;
+        let n_object = 'time:' + moment.unix() + ';' + 'origin:' + window.location.host;
 
         let keys = Object.keys(object);
 

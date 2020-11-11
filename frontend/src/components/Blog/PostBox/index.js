@@ -1,13 +1,10 @@
 import React, {memo} from "react";
 import Grid from '@material-ui/core/Grid';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
-import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import {Link} from 'react-router-dom';
 import moment from 'moment-jalaali';
-import {ENV} from "../../config/env";
+import {ENV} from "../../../config/env";
 import './style.css'
-import logoIcon from './../../assets/img/logo-min.png'
 
 
 const PostBox = memo(({item}) => (
@@ -21,7 +18,7 @@ const PostBox = memo(({item}) => (
                         {item.title}
                     </Link>
                 </h4>
-                {item.img && <img className="news-items-img" src={ENV.API.STORAGE + `/content/${item.id}/` + '/100/' + item.img}/>}
+                {item.img && <img className="news-items-img" src={ENV["STORAGE"] + `/content/${item.id}/` + '/100/' + item.img}/>}
             </div>
             <Grid spacing={3} container>
                 <ul>
@@ -37,7 +34,7 @@ const PostBox = memo(({item}) => (
                     {/*</li>*/}
                 </ul>
             </Grid>
-            <p className='news-item-content' dangerouslySetInnerHTML={{ __html: item.content}} />
+            <p className='news-item-content' dangerouslySetInnerHTML={{ __html: item.content.substr(0,90)}} />
             <div className="Continues">
                 <Link
                     to={`/post/${item.id}/${item.slug}`}

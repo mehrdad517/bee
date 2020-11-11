@@ -1,55 +1,48 @@
 import React, { memo } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Swiper from 'react-id-swiper';
 import 'swiper/swiper-bundle.css'
 import Line from "../Line";
 import ProductBox from "../ProductBox";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 const params = {
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
+    // slidesPerView: props.slidesPerView,
+    spaceBetween: 30,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true
     },
-    renderPrevButton: () => <div className="swiper-button-prev"></div>,
-    renderNextButton: () => <div className="swiper-button-next"></div>,
-    spaceBetween: 0,
+    // autoplay: {
+    //     delay: 2500,
+    //     disableOnInteraction: false
+    // },
     breakpoints: {
         1024: {
             slidesPerView: 5,
             spaceBetween: 30
         },
         768: {
-            slidesPerView: 3,
-            spaceBetween: 20
+            slidesPerView: 4,
+            spaceBetween: 30
         },
         640: {
-            slidesPerView: 3,
-            spaceBetween: 10
-        },
-        550: {
             slidesPerView: 2,
-            spaceBetween: 10
-        },
-        400: {
-            slidesPerView: 1.7,
-            spaceBetween: 20
-        },
-        375: {
-            slidesPerView: 1.7,
-            spaceBetween: 20
-        },
-        360: {
-            slidesPerView: 1.5,
-            spaceBetween: 20
+            spaceBetween: 30
         },
         320: {
-            slidesPerView: 1.3,
-            spaceBetween: 20
+            slidesPerView: 1.5,
+            spaceBetween: 30
         }
-    },
+    }
 }
-
 
 const ProductSwiper =  memo(({ lists }) => (
     <Grid item xs={12}>
@@ -58,12 +51,12 @@ const ProductSwiper =  memo(({ lists }) => (
                 <div style={{ margin: '40px 0'}} key={index}>
                     <Line title={typeof list.title !== "undefined" ? list.title: list.label} link={list.link !== null ? list.link : ''} />
                     <div style={{ marginTop: '40px'}}>
-                        <Swiper {...params}>
+                        <Swiper navigation {...params}>
                             {list.products.map((item, index) => {
                                 return (
-                                    <div key={index}>
+                                    <SwiperSlide key={index}>
                                         <ProductBox item={item} />
-                                    </div>
+                                    </SwiperSlide>
                                 );
                             })}
                         </Swiper>

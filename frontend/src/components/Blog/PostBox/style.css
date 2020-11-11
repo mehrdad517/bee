@@ -69,8 +69,9 @@ p.news-item-content {
 }
 
 .Continues a {
-    font-size: 12px;
-    color: var(--Success-color);
+    font-size: 13px;
+    color: var(--Primary-color);
+    box-shadow: var(--primary-shadow);
     padding-left: 5px;
 }
 .Continues img {

@@ -40,7 +40,7 @@ const Master = (props) => {
     return(
         <div className={'master'}>
             <Header />
-            <div className={'master-inner'} style={{ minHeight: 500}}>
+            <div className={'master-inner'} style={{ minHeight: 800}}>
                 {children}
             </div>
             <Footer/>

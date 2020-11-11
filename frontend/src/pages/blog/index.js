@@ -8,31 +8,34 @@ import NavigateNextIcon from '@material-ui/icons/NavigateBefore';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import {Paper} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
-import {blog} from "../../redux/actions";
+import {blog, blogCategories} from "../../redux/actions";
 import Loading from "../../components/Loading";
-import PostBox from "../../components/PostBox";
+import PostBox from "../../components/Blog/PostBox";
 import Paginator from "../../components/Paginator";
 import {ENV} from "../../config/env";
 import BlogMenu from "../../components/Blog/Menu";
 
+
 export const Blog = (props) => {
 
-    const {  match } = props;
+    const { match } = props;
     const history = useHistory();
     const dispatch = useDispatch();
-
+    const location = useLocation();
     const AppState = useSelector(state => state);
 
-    const [page, setPage] = useState(1);
+    const queryString = require('query-string');
+    const query = queryString.parse(location.search);
+
+    const [page, setPage] = useState(query.page ? parseInt(query.page) : 1);
 
     useEffect(() => {
 
-    }, []);
-
-
-    useEffect(() => {
-
-        dispatch(blog({ page: page }));
+        if (match.params.id) {
+            dispatch(blogCategories(match.params.id, {page: page}));
+        } else {
+            dispatch(blog({page: page}));
+        }
 
         setTimeout(() => {
             const element = document.querySelector('body');
@@ -40,9 +43,39 @@ export const Blog = (props) => {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }, 500);
+    }, [page, match.params.id]);
 
-    }, [page]);
+    useEffect(() => {
+        // parse query string
+        const keys = Object.keys(query);
 
+        for (let i = 0; i < keys.length; i++) {
+            switch (keys[i]) {
+                case 'page':
+                    if (page !== parseInt(query.page)) {
+                        setPage(parseInt(query.page));
+                    }
+                    break;
+            }
+        }
+
+    }, [query])
+
+    const handleChangePage = (page) => {
+        // create url
+        let url = '?';
+        url += `page=${page}`;
+
+        if (match.params.id) {
+            history.push(
+                `/blog/${match.params.id}/${match.params.slug}/${url}`
+            );
+        } else {
+            history.push(`/blog/${url}`);
+        }
+
+
+    }
 
     const renderBlog = () => {
 
@@ -62,26 +95,19 @@ export const Blog = (props) => {
             <>
                 <Helmet>
                     <title>
-                        {match.params.tag === undefined && match.params.id === undefined ? AppState.setting.data.blog_title : (AppState.blog.data.result.category.meta_title ? AppState.blog.data.result.category.meta_title : AppState.blog.data.result.category.label)}
+                        {match.params.id === undefined ? AppState.setting.data.blog_title : (AppState.blog.data.result.category.meta_title ? AppState.blog.data.result.category.meta_title : AppState.blog.data.result.category.title)}
                     </title>
                     <meta
                         name="description"
-                        content={match.params.tag === undefined && match.params.id === undefined ? AppState.setting.data.blog_description : (AppState.blog.data.result.category.meta_description)}
+                        content={match.params.id === undefined ? AppState.setting.data.blog_description : (AppState.blog.data.result.category.meta_description ? AppState.blog.data.result.category.meta_description : AppState.blog.data.result.category.title)}
                     />
                     {match.params.id && (
                         <meta
                             name="canonical"
-                            content={`${ENV["MAIN_DOMAIN"]}/blog/category/${match.params.id}/${match.params.slug}`}
+                            content={`${ENV["MAIN_DOMAIN"]}/blog/${match.params.id}/${match.params.slug}`}
                         />
                     )}
-                    {match.params.tag && (
-                        <meta
-                            name="canonical"
-                            content={`${ENV["MAIN_DOMAIN"]}/blog/tag/${match.params.tag}`}
-                        />
-                    )}
-                    {match.params.tag === undefined &&
-                    match.params.id === undefined && (
+                    {match.params.id === undefined && (
                         <meta name="canonical" content={`${ENV["MAIN_DOMAIN"]}/blog`} />
                     )}
                 </Helmet>
@@ -90,24 +116,12 @@ export const Blog = (props) => {
                         separator={<NavigateNextIcon fontSize="small" />}
                         aria-label="breadcrumb"
                     >
+                        <Link to="/">بی نتورک</Link>
                         <Link to="/blog">وبلاگ</Link>
-                        {match.params.tag && (
-                            <Link
-                                to={`/blog/tag/${AppState.blog.data.result.category.label}`}
-                            >
-                                {AppState.blog.data.result.category.label}
-                            </Link>
-                        )}
-                        {AppState.blog.data.result.category.parents ? AppState.blog.data.result.category.parents.map((nav, index) => {
-                                return (
-                                    <Link key={index} to={`/blog/${nav.slug}`}>
-                                        {nav.label}
-                                    </Link>
-                                );
-                            }
-                        ) : <Link to={`/blog/${AppState.blog.data.result.category.id}/${AppState.blog.data.result.category.slug}`}>
+                        {match.params.id && <Link to={`/blog/${AppState.blog.data.result.category.id}/${AppState.blog.data.result.category.slug}`}>
                             {AppState.blog.data.result.category.title}
-                        </Link>}
+                        </Link>
+                        }
                     </Breadcrumbs>
                 </Paper>
                 <Grid spacing={2} container>
@@ -116,13 +130,13 @@ export const Blog = (props) => {
                     </Grid>
                     <Grid item={true} xs={12} sm={9}>
                         <Grid spacing={1} container>
-                        {AppState.blog.data.result.contents.data.map((item, index) => {
-                            return (
-                                <Grid item key={index} xs={12} sm={12} md={6}>
-                                    <PostBox key={index} item={item} />
-                                </Grid>
-                            );
-                        })}
+                            {AppState.blog.data.result.contents.data.map((item, index) => {
+                                return (
+                                    <Grid item key={index} xs={12} sm={12} md={6}>
+                                        <PostBox key={index} item={item} />
+                                    </Grid>
+                                );
+                            })}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -131,7 +145,7 @@ export const Blog = (props) => {
                         activePage={page}
                         itemsCountPerPage={AppState.blog.data.result.contents.per_page}
                         totalItemsCount={AppState.blog.data.result.contents.total}
-                        onChange={(page) => setPage(page)}
+                        onChange={(page) => handleChangePage(page)}
                     />
                 </Grid>
             </>
@@ -140,9 +154,9 @@ export const Blog = (props) => {
     };
 
     return (
-            <Container>
-                    {renderBlog()}
-            </Container>
+        <Container>
+            {renderBlog()}
+        </Container>
     );
 };
 

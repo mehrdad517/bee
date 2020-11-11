@@ -30,11 +30,13 @@ const theme = createMuiTheme({
             main: '#fecc00'
         }
     },
-    typography: {
-        fontFamily: 'vazir',
-        fontSize: 13
-    },
     overrides: {
+        MuiTypography: {
+            root: {
+                fontFamily: 'vazir !important',
+                fontSize: '13px !important'
+            }
+        },
         MuiChip: {
             root: {
                 marginLeft: 3
@@ -60,6 +62,7 @@ function App() {
                                     <Route exact path="/card" component={Card} />
                                     {/* blog and post   */}
                                     <Route exact path="/blog" component={Blog} />
+                                    <Route exact path="/blog/:id/:slug?" component={Blog} />
                                     <Route exact path="/post/:id/:slug?" component={Post} />
                                     <Route exact path="/page/:id" component={Post} />
                                 </Master>

@@ -86,7 +86,7 @@
     cursor: pointer;
 }
 .Menubtn span {
-    color: #202020 !important ;
+    color: var(--Dark-color) !important ;
     font-size: 14px;
     margin-right: 7px;
     /*font-weight: bold;*/
@@ -136,8 +136,8 @@
     width: 150px;
 }
 .HeadLogo img{
-    height: 65px;
-    width: 180px;
+    height: 55px;
+    width: 150px;
 }
 .HeadMenu{
     display: flex;

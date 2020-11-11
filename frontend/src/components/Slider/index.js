@@ -7,39 +7,42 @@ import {
     isMobile,
     isMobileOnly, isTablet
 } from "react-device-detect";
-import Swiper from 'react-id-swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
 import './style.css'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from 'swiper';
 
-const params = {
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    },
-    effect: 'fade',
-    spaceBetween: 30,
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false
-    },
-}
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade]);
 
 const Slider = memo(({ list }) => (
 
 
     <div className='slider'>
-        <Swiper {...params}>
+        <Swiper
+            effect="fade"
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            centeredSlides={true}
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: true,
+            }}
+            scrollbar={{ draggable: true }}
+        >
             {list.map((item, index) => {
                 if (isMobileOnly) {
                     return (
-                        <div  key={index}>
-                            {item.link ? <a href={item.link}><img alt={item.caption} src={item.prefix + '/500/' + item.file}/></a> : <img alt={item.caption} src={item.prefix + '/500/' + item.file}/>}
-                        </div>
+                        <SwiperSlide  key={index}>
+                            {item.link ? <a href={item.link}><img alt={item.caption} src={item.prefix + '/300/' + item.file}/></a> : <img alt={item.caption} src={item.prefix + '/300/' + item.file}/>}
+                        </SwiperSlide>
                     );
                 }  else {
                     return (
-                        <div style={{ height: '500px', borderRadius: '10px' }} key={index}>
+                        <SwiperSlide key={index}>
                             {item.link ? <a href={item.link}><img alt={item.caption} src={item.prefix + '/' + item.file}/></a> : <img alt={item.caption} src={item.prefix + '/' + item.file}/>}
-                        </div>
+                        </SwiperSlide>
                     );
                 }
             })}

@@ -4,7 +4,6 @@ import PostBox from "../PostBox";
 
 const PostList = memo(({ list }) => (
 
-
     <Grid spacing={1} container>
         {list.map((item, index) => {
             if (index > 3) return;

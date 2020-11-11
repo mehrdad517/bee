@@ -142,6 +142,25 @@ export function setting() {
 }
 
 
+export function blogCategories(id, object) {
+
+    return function (dispatch) {
+
+        dispatch({ type: BLOG_REQUESTING });
+
+        try {
+            new Api().get('/blog/category/' + id, object).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: BLOG_SUCCESS, payload: response});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: BLOG_FAILURE, err: e });
+        }
+    }
+
+}
+
 export function blog(object) {
 
     return function (dispatch) {

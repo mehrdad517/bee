@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Line from "../components/Line";
-import PostList from "../components/PostList";
+import PostList from "../components/Blog/PostList";
 import Grid from "@material-ui/core/Grid";
 import {useDispatch, useSelector} from "react-redux";
 import {blog, brand, productSwiper, slider} from "../redux/actions";

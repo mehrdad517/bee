@@ -86,7 +86,7 @@ export const BlogMenu = () => {
                   />
               ))}
             </span>
-            <Link onClick={() => setTimeout(() => {dispatch({type: MENU_DRAWER, payload: false})}, 100) } to={`/shop/category/${id}/${slug}`}>{title}</Link>
+            <Link onClick={() => setTimeout(() => {dispatch({type: MENU_DRAWER, payload: false})}, 100) } to={`/blog/${id}/${slug}`}>{title}</Link>
           </span>
                     {hasChild === true && (
                         <ul
@@ -112,7 +112,7 @@ export const BlogMenu = () => {
 
     return (
             <React.Fragment>
-                {Menu.data.blog_categories.length > 0 && (
+                {Menu.data.blog_categories && Menu.data.blog_categories.length > 0 && (
                     <Paper className={'blog_categories_container'}>
                         {renderBlogMenu(Menu.data.blog_categories)}
                     </Paper>
