@@ -16,7 +16,7 @@ class Access
      */
     public function handle(Request $request, Closure $next)
     {
-        
+
         foreach ($request->all() as $key => $value) { // sql injection
 
             if (!preg_match('/{.*}/', $value)) {

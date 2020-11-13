@@ -861,7 +861,7 @@ Route::prefix('/')->middleware('access')->group(function () {
 
 
                 Auth::user()->update([
-                    'remember_token' => \Illuminate\Support\Facades\Hash::make(quickRandom()),
+                    'remember_token' => quickRandom(),
                 ]);
 
                 // create payment
@@ -908,7 +908,7 @@ Route::prefix('/')->middleware('access')->group(function () {
 
             if ( ! $user ) return response(['status' => false, 'msg' => 'درخواست نامعتبر: کاربر پرداخت کننده با سفارش دهنده منطبق نیست.']);
 
-            Auth::user()->update([
+            $user->update([
                 'remember_token' => \Illuminate\Support\Facades\Hash::make(quickRandom())
             ]);
 
