@@ -906,7 +906,7 @@ Route::prefix('/')->middleware('access')->group(function () {
             $order = \Modules\Order\Entities\Order::find($order_id);
             $user = User::where('id', $order->user_id)->where('remember_token', $token)->first();
 
-            if ( ! $user ) return response(['status' => false, 'msg' => 'درخواست نامعتبر: کاربر پرداخت کننده با سفارش دهنده منطبق نیست.']);
+            if ( ! $user ) return view('bank-error', ['msg' => 'ارسال درخواست نامعتبر, کاربر پرداخت کننده با سفارش دهنده منطبق نیست.']);
 
             $user->update([
                 'remember_token' => quickRandom()
@@ -914,7 +914,7 @@ Route::prefix('/')->middleware('access')->group(function () {
 
             $transaction = \Modules\Finanical\Entities\Transaction::find($uuid);
 
-            if ($transaction->status == 'success')  return response(['status' => false, 'msg' => 'این فاکتور قبلا پرداخت شده است.']);
+            if ($transaction->status == 'success')   return view('bank-error', ['msg' => 'این فاکتور قبلا پرداخت شده است.']);
 
             /**
              * get bank parameters

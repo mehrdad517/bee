@@ -17,8 +17,8 @@
     <img src="{{ asset('/error.jpg') }}">
     <a href="{{ env('WEB_URL') . '/card' }}">بازگشت به سایت</a>
 </div>
-<script>
+<script type="text/javascript">
     setTimeout(() => {
-        window.location.href = {{ env('WEB_URL') }} + '/card';
+        window.location = {{ env('WEB_URL') }} + '/card';
     }, 500)
 </script>
