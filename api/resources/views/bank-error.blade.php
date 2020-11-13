@@ -19,6 +19,6 @@
 </div>
 <script type="text/javascript">
     setTimeout(() => {
-        window.location = 'http://beeapp.ir/card';
-    }, 500)
+        window.location = "{{ env('WEB_URL') }}" + '/card';
+    }, 2000)
 </script>
