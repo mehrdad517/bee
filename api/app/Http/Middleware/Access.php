@@ -61,7 +61,7 @@ class Access
         }
 
 
-        if ($request->get('origin') != 'localhost') {
+        if ($request->get('origin') != 'beeapp.ir') {
             $msg = 'invalid request';
             return response(['status' => false, 'msg' => $msg], 400);
         }
