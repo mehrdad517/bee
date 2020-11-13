@@ -84,16 +84,7 @@ class Parsian extends GatewayAbstract implements GatewayInterface
 
 
         if ($result->SalePaymentRequestResult->Token && $result->SalePaymentRequestResult->Status === 0) {
-
-            var_dump([
-                'status' => true,
-                'msg' => 'در حال اتصال به درگاه بانک',
-                'payload' => [
-                    'action' => "https://pec.shaparak.ir/NewIPG/?Token=" . $result->SalePaymentRequestResult->Token,
-                    'method' => 'GET',
-                    'fields' => []
-                ]
-            ]);
+            
             return response([
                 'status' => true,
                 'msg' => 'در حال اتصال به درگاه بانک',
