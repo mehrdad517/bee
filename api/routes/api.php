@@ -935,8 +935,7 @@ Route::prefix('/')->middleware('access')->group(function () {
                 $order->status = 1;
                 $order->save();
             } else {
-                echo "<p>".$result['msg']."</p>";
-                die;
+                return view('bank-error', ['msg' => $result['msg']]);
             }
 
             return redirect()->away(env('WEB_URL') . '/invoice/' . $order_id);
