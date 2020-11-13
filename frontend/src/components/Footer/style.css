@@ -1,5 +1,5 @@
 .Footer {
-    background-color: #263239;
+    background-color: var(--Dark-color);
     margin-top: 70px;
     padding: 20px 0 0 0;
     color: #d3d3d3;
@@ -45,6 +45,12 @@
 
 .FooterImg li {
     max-width: 75px;
+    background-color: hsla(0,0%,43.9%,.37);
+    margin: 1px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .FooterImg li img {

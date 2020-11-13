@@ -10,6 +10,8 @@ import accountIcon from './../../assets/img/account.png'
 import cartIcon from './../../assets/img/cart.png'
 import searchIcon from './../../assets/img/search.png'
 import logo from './../../assets/img/logo-min.png'
+import menuIcon from './../../assets/img/menu.png'
+
 import {AUTH_DIALOG, MENU_DRAWER} from "../../redux/types";
 
 
@@ -44,7 +46,7 @@ const Header = () => {
                                     <div className="Menu">
                                         <div className="Menubtn" onClick={() => dispatch({type: MENU_DRAWER, payload: true})}>
                                             <span>منوی سایت</span>
-                                            <img src={(AppState.setting.data.backend + '/static/img/menu.png')}/>
+                                            <img src={menuIcon}/>
                                         </div>
                                     </div>
                                 </div>

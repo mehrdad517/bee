@@ -82,14 +82,15 @@
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    padding: 1px 10px;
+    padding: 3px 10px;
     cursor: pointer;
+    box-shadow: var(--box-shadow);
 }
 .Menubtn span {
     color: var(--Dark-color) !important ;
-    font-size: 14px;
+    font-size: 13px;
     margin-right: 7px;
-    /*font-weight: bold;*/
+    font-weight: bold;
 }
 
 .Menubtn img {
@@ -129,15 +130,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 180px;
+    /*width: 180px;*/
 }
 .HeadLogo a{
     height: 50px;
     width: 150px;
 }
 .HeadLogo img{
-    height: 55px;
-    width: 150px;
+    /*height: 55px;*/
+    /*width: 150px;*/
 }
 .HeadMenu{
     display: flex;
@@ -160,30 +161,6 @@
     justify-content: space-between;
     align-items: center;
 }
-.login-btn {
-    align-items: center;
-    font-size: 13px;
-//background-color:#ff6874;
-//color: white;
-    border: 1px solid rgba(0,0,0,.09);
-    padding: 5px 10px;
-    border-radius: 5px;
-    height: unset;
-    display: flex;
-    align-self: center;
-    cursor: pointer;
-    color: var(--Primary_color) !important;
-    transition: .3s;
-}
-.login-btn:hover{
-    background-color:var(--Primary_color) !important;
-    color: white!important;
-    border: 1px solid rgba(0,0,0,.09);
-//color: var(--Primary_color) !important;
-}
-.login-btn-icon{
-//display: none;
-}
 .shop-btn{
     padding: 10px;
     cursor: pointer;
@@ -201,7 +178,7 @@
 
 @media all and (max-width: 990px){
     .Header{
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .Header-top-right-search {
         margin: 0;

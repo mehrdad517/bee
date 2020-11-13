@@ -27,7 +27,7 @@ Route::prefix('/')->middleware('access')->group(function () {
 
     Route::get('/setting', function (Request $request) {
 
-        if (!\Cache::tags(['setting'])->has('setting')) {
+        if (!\Cache::has('setting')) {
 
             $domain = \Modules\Setting\Entities\Domain::with(['links' => function($q) {
                 $q->select('id', 'title', 'value', 'type');
@@ -37,18 +37,18 @@ Route::prefix('/')->middleware('access')->group(function () {
             $domain->introduce = strip_tags($domain->introduce);
 
 
-            \Cache::tags(['setting'])->put('setting', $domain , 24 * 60);
+            \Cache::put('setting', $domain , 24 * 60);
 
 
         }
 
-        return response(\Cache::tags(['setting'])->get('setting'));
+        return response(\Cache::get('setting'));
 
     });
 
     Route::get('/menu', function (Request $request) {
 
-        if (!\Cache::tags(['menu'])->has('menu')) {
+        if (!\Cache::tags(['product_categories', 'menu', 'footer_menu', 'blog_categories'])->has('menu')) {
 
             \Cache::tags(['menu'])->put('menu', [
                 'product_categories' => \Modules\Product\Entities\Category::where('status', 1)->where('deleted', 0)->get()->toTree(),
@@ -471,7 +471,6 @@ Route::prefix('/')->middleware('access')->group(function () {
                 'navigation' => [],
                 'tree' => [],
                 'brands' => [],
-                'attributes' => [],
                 'sort' => $sort,
             ];
 
@@ -545,7 +544,7 @@ Route::prefix('/')->middleware('access')->group(function () {
                     [
                         'id' => $brand->id,
                         'slug' => $brand->slug,
-                        'label' => $brand->title
+                        'title' => $brand->title
                     ]
                 ];
 
@@ -621,9 +620,6 @@ Route::prefix('/')->middleware('access')->group(function () {
                 // get all brands
                 $result['brands'] = $category->brands()->select('id', 'slug', 'title')->where('status', 1)->get();
 
-                // get all attr
-                $result['attributes'] = $category->attributes()->select('id', 'title', 'slug', 'has_link', 'content')->with(['tags'])->where('status', 1)->get();
-
 
                 return ['result' => $result, 'category' => $category];
 
@@ -639,22 +635,11 @@ Route::prefix('/')->middleware('access')->group(function () {
                         }
                     }
                     // brand filter
-                    if ($request->has('brands')) {
-                        $q->whereIn('brand_id', $request->get('brands'));
+                    if ($request->has('brands') && $request->get('brands')) {
+                        $q->whereIn('brand_id', explode(',', $request->get('brands')));
                     }
                 })
                 ->where('status', 1) // change to true
-                ->when($request->has('attributes'), function ($q) use($request) {
-                    $attributes = json_decode($request->get('attributes'), true);
-                    if (count($attributes) > 0) {
-                        $q->whereHas('attributes', function ($q) use($request, $attributes) {
-                            foreach ($attributes as $key=>$item) {
-                                $q->where('attribute_id', substr($key, 1))
-                                    ->whereIn('tag_id', $item);
-                            }
-                        });
-                    }
-                })
                 ->when(true, function ($q) use($request, $sort) {
                     if ($request->has('sort')) {
                         if (isset($sort[$request->get('sort')])) {
@@ -705,48 +690,23 @@ Route::prefix('/')->middleware('access')->group(function () {
 
         Route::get('/products/{id}', function ($id, Request $request) {
 
-
-            if (!\Cache::has("product[$id]")) {
-
-                $price_parameter = [];
+            $data = \Cache::remember("product[$id]", 24 * 60 , function () use($id) {
 
                 $product = \Illuminate\Support\Facades\DB::select('call sp_frontend_product(?)', [$id]);
-                $attributes = \Illuminate\Support\Facades\DB::select('call sp_frontend_product_attributes(?)', [$id]);
                 $similar = \Illuminate\Support\Facades\DB::select('call sp_frontend_product_family(?)', [$id]);
                 $categories = \Illuminate\Support\Facades\DB::select('call sp_frontend_product_categories(?)', [$id]);
-                $group_price_parameter = \Illuminate\Support\Facades\DB::select('call sp_frontend_product_price_parameters(?)', [$id]);
 
-
-
-                if ($group_price_parameter) {
-
-                    foreach ($group_price_parameter as $key=>$item) {
-                        if($item->parent_id && $item->parent_title) {
-                            $price_parameter[$key] = [
-                                'id' => $item->parent_id,
-                                'title' => $item->parent_title,
-                                'options' => \Modules\Product\Entities\PriceParameter::whereIn('id', explode(',', $item->node_values))->get(['id', 'title'])->toArray()
-                            ];
-                        }
-                    }
-
-                }
-
-                $data = [
+                return [
                     'product' => $product[0],
-                    'attributes' => $attributes,
                     'similar' => $similar,
                     'categories' => $categories,
-                    'price_parameters' => $price_parameter
                 ];
 
-                return response()->json($data);
-
-                \Cache::put("product[$id]", $data , 24 * 60);
-            }
+            });
 
 
-            return response()->json(\Cache::get("product[$id]"), 200);
+            return response($data);
+
         });
 
         Route::post('/products/{id}/pins', function ($id, Request $request) {
@@ -787,11 +747,11 @@ Route::prefix('/')->middleware('access')->group(function () {
 
         Route::post('/', function (Request $request) {
             try {
-                $card = DB::select('call sp_card_add(?, ?, ?, ?)', [Auth::user()->id, $request->get('id'), $request->get('count'), $request->has('is_product') ? $request->get('is_product') : true]);
+                $card = DB::select('call sp_card_add(?, ?, ?)', [Auth::user()->id, $request->get('id'), $request->get('count')]);
+
                 return response()->json(['status' => true, 'card' => $card]);
             } catch (Exception $exception) {
                 if ($exception instanceof \Illuminate\Database\QueryException) {
-
                     return response()->json(['status' => false, 'msg' => $exception->getPrevious()->errorInfo[2]]);
                 } else {
                     return response()->json(['status' => false, 'msg' => $exception->getMessage()]);
@@ -891,6 +851,7 @@ Route::prefix('/')->middleware('access')->group(function () {
          * invoice_id
          */
         Route::post('/', function (Request $request) {
+
             try {
 
                 $order = \Modules\Order\Entities\Order::find($request->get('invoice_id'));
@@ -898,20 +859,6 @@ Route::prefix('/')->middleware('access')->group(function () {
                 if ($order->user_id !== Auth::id()) return response(['status' => false, 'msg' => 'این فاکتور متعلق به شما نیست']);
                 if (in_array($order->status, [1])) return response(['status' => false, 'msg' => 'این فاکتور پرداخت شده است']);
 
-                $order->status = 1;
-                $order->save();
-
-                return response([
-                    'status' => true,
-                    'msg' => 'در حال اتصال به درگاه بانک',
-                    'payload' => [
-                        'action' => env('Pasargad_Api'),
-                        'method' => 'POST',
-                        'fields' => [
-                            ['name' => 'Token', 'value' => 'asdasdsada']
-                        ]
-                    ]
-                ]);
 
                 Auth::user()->update([
                     'remember_token' => \Illuminate\Support\Facades\Hash::make(quickRandom()),
@@ -919,19 +866,20 @@ Route::prefix('/')->middleware('access')->group(function () {
 
                 // create payment
                 switch ($request->get('gateway')) {
+                    case 'parsian':
+                        $gateway = Payment::parsian();
+                        $gateway->setAmount($order->total_pay);
+                        break;
                     case 'passargad':
                         $gateway = Payment::pasargad();
-                        $gateway->setAmount($request->get('amount'));
+                        $gateway->setAmount($order->total_pay);
                         break;
-                    default:
-                        $gateway = Payment::pasargad();
-                        $gateway->setAmount($request->get('amount'));
                 }
 
 
                 $gateway->setDescription('پرداخت فاکتور');
                 $transaction = $gateway->ready();
-                $gateway->setCallback(route('gateway_callback', ['uuid' => $transaction->id, 'order' => $id, 'token' => Auth::user()->getRememberToken()]));
+                $gateway->setCallback(route('gateway_callback', ['uuid' => $transaction->id, 'invoice' => $order->id, 'token' => Auth::user()->getRememberToken()]));
 
                 return $gateway->redirect();
 
@@ -945,12 +893,13 @@ Route::prefix('/')->middleware('access')->group(function () {
             }
         })->middleware('auth:api');
 
+
         Route::any('/callback', function (Request $request) {
 
             /**
              * get callback parameters from app
              */
-            $order_id = $request->get('order');
+            $order_id = $request->get('invoice');
             $uuid = $request->get('uuid');
             $token = $request->get('token');
 
@@ -970,12 +919,12 @@ Route::prefix('/')->middleware('access')->group(function () {
             /**
              * get bank parameters
              */
-
             switch ($transaction->gateway) {
-                case 'passargad':
-                    $gateway = Payment::pasargad();
+                case 'parsian':
+                    $gateway = Payment::parsian();
+                    $gateway->setParameter($request->all());
                     break;
-                default:
+                case 'passargad':
                     $gateway = Payment::pasargad();
                     break;
             }
@@ -983,8 +932,8 @@ Route::prefix('/')->middleware('access')->group(function () {
             $result = $gateway->verify($transaction); // return transaction model
 
             if ($result->status === 'success') {
-                // update order status
-                // add order to queue
+                $order->status = 1;
+                $order->save();
             }
 
             return redirect()->away(env('WEB_URL') . '/invoice/' . $order_id);
@@ -993,7 +942,6 @@ Route::prefix('/')->middleware('access')->group(function () {
 
 
     });
-
 
     Route::prefix('order')->middleware('auth:api')->group(function () {
 

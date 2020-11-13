@@ -10,6 +10,8 @@ import address from "./address";
 import region from './region'
 import post from './post'
 import menu from './menu'
+import shop from './shop'
+import product from './product'
 
 const rootReducer = combineReducers({
     auth,
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
     region,
     post,
     menu,
+    shop,
+    product
 });
 
 export default rootReducer;

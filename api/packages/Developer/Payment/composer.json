@@ -1,0 +1,16 @@
+{
+    "name": "payment",
+    "description": "pasargad, zarinpal and etc ...",
+    "authors": [
+        {
+            "name": "Mehrdad Masoumi",
+            "email": "mehrdad.masoumi517@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Developer\\Payment\\": "src/"
+        }
+    },
+    "require": {}
+}

@@ -19,18 +19,26 @@ import Card from "./pages/order/card";
 import Invoice from "./pages/order/invoice";
 import {Post} from "./pages/blog/post";
 import {Blog} from "./pages/blog";
+import Shop from "./pages/shop";
+import Product from "./pages/product";
 
 const theme = createMuiTheme({
     direction: 'rtl',
     palette: {
         primary: {
-            main: '#000'
+            main: '#263238'
         },
         secondary: {
-            main: '#fecc00'
+            main: '#fada36'
         }
     },
     overrides: {
+        MuiListItem: {
+            root: {
+                paddingTop: '4px',
+                paddingBottom: '4px'
+            }
+        },
         MuiTypography: {
             root: {
                 fontFamily: 'vazir !important',
@@ -60,6 +68,11 @@ function App() {
                                 <Master>
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/card" component={Card} />
+                                    {/* product and shop */}
+                                    <Route exact path="/shop" component={Shop} />
+                                    <Route exact path="/product/:id/:slug?" component={Product} />
+                                    <Route exact path="/category/:id/:slug?" component={Shop} />
+                                    <Route exact path="/brand/:id/:slug?" component={Shop} />
                                     {/* blog and post   */}
                                     <Route exact path="/blog" component={Blog} />
                                     <Route exact path="/blog/:id/:slug?" component={Blog} />

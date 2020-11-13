@@ -64,7 +64,7 @@
     direction: rtl;
     font-size: 14px;
     background-color: white;
-    margin: 15px 0;
+    margin: 15px 0 0 0;
     min-height: 300px;
 }
 .address-box-dashed {
@@ -74,7 +74,7 @@
     align-self: center;
     align-items: center;
     flex-direction: column;
-    min-height: 320px;
+    min-height: 325px;
 }
 .address-box-inner {
     min-height: 100px;

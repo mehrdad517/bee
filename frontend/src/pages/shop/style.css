@@ -1,0 +1,62 @@
+.shop-navigation {
+    background-color: var(--Dark-color) !important;
+    color: #ffffff !important;
+    padding: 10px;
+    border-radius: 7px !important;
+    margin-bottom: 5px;
+    /*width: 100%;*/
+    box-shadow: var(--box-shadow);
+}
+.shop-navigation li a {
+    color: var(--Primary-color);
+}
+.shop-aside {
+    background-color: var(--Dark-color);
+    /*min-height: 400px;*/
+    border-radius: 10px;
+    color: #d3d3d3;
+    padding: 5px 15px 15px 15px;
+    position: sticky;
+    top: 10px;
+}
+.shop-aside-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 7px;
+}
+.shop-aside-heading h3 {
+    color: var(--Primary-color);
+    font-weight: normal !important;
+    margin-right: 7px;
+}
+.shop-sort-chip {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 0 20px 0;
+    flex-wrap: wrap;
+}
+
+.shop-sort-chip-element > div.MuiChip-root {
+    box-shadow: var(--box-shadow);
+    color: #d3d3d3;
+}
+.shop-sort-chip-element > div.MuiChip-root:hover {
+    background-color: var(--Primary-color);
+    color: var(--Dark-color);
+}
+.shop-sort-chip-element > div.MuiChip-colorSecondary {
+    color: var(--Dark-color);
+}
+.shop-aside-partition {
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+.shop-aside-partition h3 {
+    /*text-align: center;*/
+    font-weight: normal;
+    /*color: var(--Primary-color);*/
+}

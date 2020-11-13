@@ -8,7 +8,7 @@
     width: 100%;
 }
 .categoryMainBox:hover .categoryBox{
-    background-color: var(--Primary-color);
+    background-color: rgba(215, 195, 67, 0.72);
 }
 .categoryMainBox:hover .categoryPrice span ,categoryBoxTitle{
     color:white;
@@ -35,7 +35,9 @@
     padding: 10px;
     border-radius: 15px;
     overflow-y: auto;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    /*height: 100px;*/
+    position: relative;
 }
 .categoryPrice{
     display: flex;
@@ -44,7 +46,7 @@
 }
 .categoryPrice span:last-child{
     color: var(--primary);
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
 }
 .categoryOff{
@@ -52,12 +54,15 @@
     text-decoration: line-through;
     font-size: 12px;
     font-weight: bold;
+    position: absolute;
+    top: 35px;
 }
 .categoryPriceBox{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 18px;
+    margin-top: 20px;
+
 }
 .categoryBoxTitle{
     color: var(--Dark-color);

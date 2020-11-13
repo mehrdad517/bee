@@ -1,8 +1,8 @@
 .slider {
-    margin:10px 0 20px 0;
+    margin: 10px 0 20px 0;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: var(--box-shadow) !important;
+    /*box-shadow: var(--box-shadow) !important;*/
 }
 .slider img {
     box-shadow: var(--box-shadow) !important;

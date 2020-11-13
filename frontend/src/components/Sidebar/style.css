@@ -2,7 +2,7 @@
     width: 300px;
     padding: 0 20px;
     font-size: 14px;
-}
+}.sidebar .sidebar-logo img
 .sidebar .MuiSvgIcon-fontSizeSmall {
     font-size: 1rem;
 }
@@ -12,8 +12,8 @@
     padding: 20px 0;
 }
 .sidebar .sidebar-logo img{
-    width: 120px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
 }
 .sidebar ol {
     padding: 0 5px;

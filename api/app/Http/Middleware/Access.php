@@ -44,14 +44,14 @@ class Access
 
                 if (!preg_match('/{.*}/', trim($input[0]))) {
                     if (preg_match('/\'|\"|\<|\>|select|union|select|insert|drop|delete|update|cast|create|convert|alter|declare|order|script|md5|benchmark|encode/', strtolower(trim($input[0])))) {
-                        $msg = "invalid request for input $input[0]";
+                        $msg = "firewall invalid request for input $input[0]";
                         return response(['status' => false, 'msg' => $msg], 403);
                     }
                 }
 
                 if (!preg_match('/{.*}/', trim($input[1]))) {
                     if (preg_match('/\'|\"|\<|\>|select|union|select|insert|drop|delete|update|cast|create|convert|alter|declare|order|script|md5|benchmark|encode/', strtolower(trim($input[1])))) {
-                        $msg = "invalid request for input $input[0] with value $input[1]";
+                        $msg = "firewall invalid request for input $input[0] with value $input[1]";
                         return response(['status' => false, 'msg' => $msg], 403);
                     }
                 }
@@ -67,6 +67,8 @@ class Access
         }
 
 
+
+//        var_dump($request->all());
 
 
         return $next($request);

@@ -125,7 +125,7 @@ export const SidebarMenu = () => {
                   />
               ))}
             </span>
-            <Link onClick={() => setTimeout(() => {dispatch({type: MENU_DRAWER, payload: false})}, 100) } to={`/shop/category/${id}/${slug}`}>{title}</Link>
+            <Link onClick={() => setTimeout(() => {dispatch({type: MENU_DRAWER, payload: false})}, 100) } to={`/category/${id}/${slug}`}>{title}</Link>
           </span>
                     {hasChild === true && (
                         <ul

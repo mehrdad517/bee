@@ -44,18 +44,18 @@ const params = {
     }
 }
 
-const ProductSwiper =  memo(({ lists }) => (
+const ProductSwiper = memo(({ lists }) => (
     <Grid item xs={12}>
         {lists.map((list, index) => {
             return (
-                <div style={{ margin: '40px 0'}} key={index}>
-                    <Line title={typeof list.title !== "undefined" ? list.title: list.label} link={list.link !== null ? list.link : ''} />
+                <div style={{ margin: '20px 0'}} key={index}>
+                    <Line title={typeof list.title !== undefined ? list.title: list.label} link={list.link !== undefined && list.link !== null ? list.link : ''} />
                     <div style={{ marginTop: '40px'}}>
                         <Swiper navigation {...params}>
                             {list.products.map((item, index) => {
                                 return (
                                     <SwiperSlide key={index}>
-                                        <ProductBox item={item} />
+                                        <ProductBox key={index} item={item} />
                                     </SwiperSlide>
                                 );
                             })}

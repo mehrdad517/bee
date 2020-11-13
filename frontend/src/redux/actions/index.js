@@ -15,7 +15,7 @@ import {
     MENU_REQUESTING, MENU_SUCCESS,
     POST_FAILURE,
     POST_REQUESTING,
-    POST_SUCCESS,
+    POST_SUCCESS, PRODUCT_FAILURE, PRODUCT_REQUESTING, PRODUCT_SUCCESS,
     PRODUCT_SWIPER_FAILURE,
     PRODUCT_SWIPER_REQUESTING,
     PRODUCT_SWIPER_SUCCESS,
@@ -24,11 +24,134 @@ import {
     REGION_SUCCESS,
     SETTING_FAILURE,
     SETTING_REQUESTING,
-    SETTING_SUCCESS,
+    SETTING_SUCCESS, SHOP_FAILURE, SHOP_REQUESTING, SHOP_SUCCESS,
     SLIDER_FAILURE,
     SLIDER_REQUESTING,
     SLIDER_SUCCESS
 } from "../types";
+import {toast} from "react-toastify";
+
+
+export function card() {
+
+    return function (dispatch) {
+        dispatch({ type: CARD_REQUESTING });
+        try {
+            new Api().get('/card', {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: CARD_SUCCESS, payload: response});
+                    toast.success('سبد خرید به روز رسانی گردید.');
+                }
+            })
+        } catch (e) {
+            dispatch({ type: CARD_FAILURE, err: e });
+        }
+    }
+
+}
+
+export function addToCart(object) {
+
+    return function (dispatch) {
+
+        dispatch({ type: CARD_REQUESTING });
+
+        try {
+            new Api().post('/card', object).then((response) => {
+                if (typeof response !== "undefined") {
+                    if (response.status) {
+                        dispatch({ type: CARD_SUCCESS, payload: response.card});
+                        toast.success('سبد خرید به روز رسانی گردید.');
+                    } else {
+                        dispatch({ type: CARD_FAILURE, err: response.msg });
+                        toast.error(response.msg);
+                    }
+                }
+            })
+        } catch (e) {
+            dispatch({ type: CARD_FAILURE, err: e });
+            toast.error(e)
+        }
+    }
+}
+
+export function removeASCart(id) {
+
+    return function (dispatch) {
+
+        dispatch({ type: CARD_REQUESTING });
+
+        try {
+            new Api().delete('/card/' + id).then((response) => {
+                if (typeof response !== "undefined") {
+                    if (response.status) {
+                        dispatch({ type: CARD_SUCCESS, payload: response.card});
+                        toast.success('سبد خرید به روز رسانی گردید.');
+                    } else {
+                        dispatch({ type: CARD_FAILURE, err: response.msg });
+                        toast.error(response.msg);
+                    }
+                }
+
+            })
+        } catch (e) {
+            dispatch({ type: CARD_FAILURE, err: e });
+            toast.error(e)
+        }
+    }
+}
+
+export function product(id) {
+    return function (dispatch) {
+        dispatch({ type: PRODUCT_REQUESTING });
+        try {
+            new Api().get('/shop/products/' + id, {}).then((response) => {
+                if (typeof response !== "undefined") {
+                    dispatch({ type: PRODUCT_SUCCESS, payload: response, id: id});
+                }
+            })
+        } catch (e) {
+            dispatch({ type: PRODUCT_FAILURE, err: e });
+        }
+    }
+}
+
+
+export function shop(type, id, object) {
+    return function (dispatch) {
+        dispatch({ type: SHOP_REQUESTING });
+        try {
+
+            switch (type) {
+                case 'shop':
+                    new Api().get('/shop', object).then((response) => {
+                        if (typeof response !== "undefined") {
+                            dispatch({ type: SHOP_SUCCESS, payload: response});
+                        }
+                    });
+                    break;
+                case 'brand':
+                    new Api().get('/shop/brand/' + id, object).then((response) => {
+                        if (typeof response !== "undefined") {
+                            dispatch({ type: SHOP_SUCCESS, payload: response});
+                        }
+                    });
+                    break;
+                case 'category':
+                    new Api().get('/shop/category/' + id, object).then((response) => {
+                        if (typeof response !== "undefined") {
+                            dispatch({ type: SHOP_SUCCESS, payload: response});
+                        }
+                    });
+                    break;
+            }
+
+
+        } catch (e) {
+            dispatch({ type: SHOP_FAILURE, err: e });
+        }
+    }
+}
 
 export function menu() {
     return function (dispatch) {
@@ -105,22 +228,7 @@ export function address() {
 
 }
 
-export function card() {
 
-    return function (dispatch) {
-        dispatch({ type: CARD_REQUESTING });
-        try {
-            new Api().get('/card', {}).then((response) => {
-                if (typeof response !== "undefined") {
-                    dispatch({ type: CARD_SUCCESS, payload: response});
-                }
-            })
-        } catch (e) {
-            dispatch({ type: CARD_FAILURE, err: e });
-        }
-    }
-
-}
 
 
 

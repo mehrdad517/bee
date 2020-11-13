@@ -8,7 +8,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {ADDRESS_DIALOG, ADDRESS_REQUESTING} from "../../redux/types";
+import {ADDRESS_DIALOG, ADDRESS_REQUESTING, ADDRESS_SUCCESS} from "../../redux/types";
 import {region} from "../../redux/actions";
 import Api from "../../services/api";
 import {toast} from "react-toastify";
@@ -24,8 +24,8 @@ const AddressDialog = () => {
 
     const initStat = {
         postal_code: '',
-        reciver_name: '',
-        reciver_mobile: '',
+        reciver_name: AppState.auth.user.name,
+        reciver_mobile: AppState.auth.user.mobile,
         reciver_national_code: '',
         region_id: '',
         main: '',
@@ -93,7 +93,7 @@ const AddressDialog = () => {
                 if (typeof res !== "undefined") {
                     if (res.status) {
                         toast.success("آدرس شما با موفقیت ثبت گردید");
-                        dispatch({ type: ADDRESS_REQUESTING });
+                        dispatch({ type: ADDRESS_SUCCESS, payload: res.address });
                         setTimeout(() => {
                             dispatch({type: ADDRESS_DIALOG, payload: false});
                         }, 200);
@@ -125,6 +125,7 @@ const AddressDialog = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
+                                    autoComplete={"off"}
                                     label="نشانی پستی"
                                     variant="outlined"
                                     margin='dense'
@@ -138,6 +139,7 @@ const AddressDialog = () => {
                             </Grid>
                             <Grid item xs={12} sm={4}>
                                 <TextField
+                                    autoComplete={"off"}
                                     type='text'
                                     label="کد پستی"
                                     variant="outlined"
@@ -160,6 +162,7 @@ const AddressDialog = () => {
                                             getOptionLabel={(option) => option.title}
                                             renderInput={(params) =>
                                                 <TextField
+                                                    autoComplete={"off"}
                                                     {...params}
                                                     fullWidth
                                                     name='region_id'
@@ -182,12 +185,13 @@ const AddressDialog = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12} >
                                 <TextField
+                                    autoComplete={"off"}
                                     label="نام و نام خانوادگی"
                                     variant="outlined"
                                     margin='dense'
                                     fullWidth
                                     name='reciver_name'
-                                    value={AppState.auth.user && AppState.auth.user.name}
+                                    value={form.reciver_name}
                                     onChange={handleChangeElement}
                                     InputLabelProps={{
                                         shrink: true,
@@ -196,12 +200,13 @@ const AddressDialog = () => {
                             </Grid>
                             <Grid item xs={12} sm={6} >
                                 <TextField
+                                    autoComplete={"off"}
                                     label="موبایل"
                                     variant="outlined"
                                     margin='dense'
                                     fullWidth
                                     name='reciver_mobile'
-                                    value={AppState.auth.user && AppState.auth.user.mobile}
+                                    value={form.reciver_mobile}
                                     onChange={handleChangeElement}
                                     InputLabelProps={{
                                         shrink: true,
@@ -210,6 +215,7 @@ const AddressDialog = () => {
                             </Grid>
                             <Grid item xs={12} sm={6} >
                                 <TextField
+                                    autoComplete={"off"}
                                     type='text'
                                     label="کد ملی"
                                     variant="outlined"

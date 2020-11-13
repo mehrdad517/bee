@@ -40,7 +40,7 @@ class Api {
 
     _makeRequest(object) {
 
-        let n_object = 'time:' + moment.unix() + ';' + 'origin:' + window.location.host;
+        let n_object = 'random:' + Math.random() + ';' +'time:' + moment().unix() + ';' + 'origin:' + window.location.host;
 
         let keys = Object.keys(object);
 
@@ -95,7 +95,7 @@ class Api {
         })
     }
 
-    delete(url, object) {
+    delete(url, object = {}) {
         return axios.delete( ENV.API[window.location.host]+ `${url}`, {
             params : {'request' : this._makeRequest(object)},
             headers: this._headers(),

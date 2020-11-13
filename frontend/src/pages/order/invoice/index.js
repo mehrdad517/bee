@@ -56,31 +56,31 @@ const Invoice = (props) => {
 
         new Api().post(`/gateway`, {
             "invoice_id": invoice.order_id,
-            "gateway": "pasargad",
-            "type": "order"
+            "gateway": "parsian",
         }).then((response) => {
-                if (typeof response !== "undefined") {
-                    if (response.status) {
-                        let form = document.createElement("form");
-                        form.method = response.payload.method;
-                        form.action = response.payload.action;
-                        response.payload.fields.map((item) => {
-                            let element1 = document.createElement("input");
-                            element1.value = item.value;
-                            element1.name = item.name;
-                            form.appendChild(element1);
-                        });
-                        document.body.appendChild(form);
-                        form.submit();
-                    } else {
-                        toast.error(response.msg);
-                    }
-
-                    setLoading(false)
+            if (typeof response !== "undefined") {
+                if (response.status) {
+                    let form = document.createElement("form");
+                    form.method = response.payload.method;
+                    form.action = response.payload.action;
+                    response.payload.fields.map((item) => {
+                        let element1 = document.createElement("input");
+                        element1.value = item.value;
+                        element1.name = item.name;
+                        form.appendChild(element1);
+                    });
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    toast.error(response.msg);
                 }
-            })
-            .catch((err) => {
+
+                setLoading(false)
+            }
+            setLoading(false)
+        }).catch((err) => {
                 toast.error(err);
+                setLoading(false)
             })
     }
 
