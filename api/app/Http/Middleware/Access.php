@@ -16,8 +16,7 @@ class Access
      */
     public function handle(Request $request, Closure $next)
     {
-
-
+        
         foreach ($request->all() as $key => $value) { // sql injection
 
             if (!preg_match('/{.*}/', $value)) {
@@ -26,6 +25,11 @@ class Access
                     return response(['status' => false, 'msg' => $msg], 403);
                 }
             }
+        }
+
+        // url that not using this middleware
+        if (in_array($request->route()->getName(), ['gateway_callback'])) {
+            return $next($request);
         }
 
         // openssl decrypt
@@ -61,14 +65,12 @@ class Access
         }
 
 
+
         if ($request->get('origin') != 'beeapp.ir') {
             $msg = 'invalid request';
             return response(['status' => false, 'msg' => $msg], 400);
         }
 
-
-
-//        var_dump($request->all());
 
 
         return $next($request);
