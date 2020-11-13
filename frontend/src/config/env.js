@@ -1,10 +1,11 @@
 export const ENV = {
 
-    'MAIN_DOMAIN': 'https://beenetwork.ir',
-    'STORAGE': 'http://api.digiattar.com/storage',
+    'MAIN_DOMAIN': 'http://beeapp.ir',
+    'STORAGE': 'http://api.beeapp.ir/storage',
 
     "API": {
-        'beenetwork.ir' : "http://localhost:8000/api",
+        'beeapp.ir' : "http://api.beeapp.ir/api",
+        'beenetwork.ir' : "https://api.beenetwork.ir/api",
         // test
         "localhost:3000" : "http://localhost:8000/api",
         "localhost:3001": "http://localhost:8000/api",
