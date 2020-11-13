@@ -934,6 +934,9 @@ Route::prefix('/')->middleware('access')->group(function () {
             if ($result['status'] === 'success') {
                 $order->status = 1;
                 $order->save();
+            } else {
+                echo "<p>".$result['msg']."</p>";
+                sleep(3);
             }
 
             return redirect()->away(env('WEB_URL') . '/invoice/' . $order_id);
