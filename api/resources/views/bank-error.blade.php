@@ -2,7 +2,10 @@
     a{
         text-decoration: none;
         font-family: "Segoe UI";
-        font-size: 14px;
+        font-size: 16px;
+    }
+    h1 {
+        font-family: "Segoe UI";
     }
     .container {
         display: flex;
