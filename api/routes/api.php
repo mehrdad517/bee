@@ -896,8 +896,6 @@ Route::prefix('/')->middleware('access')->group(function () {
 
         Route::any('/callback', function (Request $request) {
 
-
-            dd($request->all());
             /**
              * get callback parameters from app
              */
@@ -910,9 +908,9 @@ Route::prefix('/')->middleware('access')->group(function () {
 
             if ( ! $user ) return response(['status' => false, 'msg' => 'درخواست نامعتبر: کاربر پرداخت کننده با سفارش دهنده منطبق نیست.']);
 
-//            $user->update([
-//                'remember_token' => quickRandom()
-//            ]);
+            $user->update([
+                'remember_token' => quickRandom()
+            ]);
 
             $transaction = \Modules\Finanical\Entities\Transaction::find($uuid);
 

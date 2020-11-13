@@ -110,9 +110,9 @@ class Parsian extends GatewayAbstract implements GatewayInterface
         $PIN = $this->MerchantCode;
         $wsdl_url = "https://pec.shaparak.ir/NewIPGServices/Confirm/ConfirmService.asmx?WSDL";
 
-        $Token = $this->parameter["Token"];
-        $status = $this->parameter["status"];
-        $RRN = $this->parameter["RRN"];
+        $Token = isset($this->parameter["Token"]) ? $this->parameter["Token"] : -1;
+        $status = isset($this->parameter["status"]) ? $this->parameter["status"] : -1;
+        $RRN = isset($this->parameter["RRN"]) ? $this->parameter["RRN"] : 0;
 
         if ($RRN > 0 && $status == 0) {
 
