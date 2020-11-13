@@ -1,7 +1,8 @@
 <style>
     a{
         text-decoration: none;
-        font-family: Tahoma, Helvetica, Arial;
+        font-family: "Segoe UI";
+        font-size: 14px;
     }
     .container {
         display: flex;
@@ -20,5 +21,5 @@
 <script type="text/javascript">
     setTimeout(() => {
         window.location = "{{ env('WEB_URL') }}" + '/card';
-    }, 2000)
+    }, 3000)
 </script>
