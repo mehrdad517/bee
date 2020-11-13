@@ -82,7 +82,7 @@ class Parsian extends GatewayAbstract implements GatewayInterface
         ]);
 
 
-        if ($result->SalePaymentRequestResult->Token && $result->SalePaymentRequestResult->Status == 0) {
+        if ($result->SalePaymentRequestResult->Token && $result->SalePaymentRequestResult->Status == '0') {
 
             return response([
                 'status' => true,
