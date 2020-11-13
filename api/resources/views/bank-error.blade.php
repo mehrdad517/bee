@@ -15,10 +15,10 @@
 <div class="container">
     <h1>{{ $msg }}</h1>
     <img src="{{ asset('/error.jpg') }}">
-    <a href="{{ env('WEB_URL') . '/card' }}">بازگشت به سایت</a>
+    <a  href="{{ env('WEB_URL') . '/card' }}"><b>بازگشت به سایت</b></a>
 </div>
 <script type="text/javascript">
     setTimeout(() => {
-        window.location = {{ env('WEB_URL') }} + '/card';
+        window.location = 'http://beeapp.ir/card';
     }, 500)
 </script>
