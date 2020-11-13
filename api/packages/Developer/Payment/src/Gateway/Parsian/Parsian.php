@@ -128,6 +128,8 @@ class Parsian extends GatewayAbstract implements GatewayInterface
                     "requestData" => $params
                 ]);
 
+                dd($result);
+
                 if ($result->ConfirmPaymentResult->Status != '0') {
                     $err_msg = $result->ConfirmPaymentResult->Message;
                 } else {

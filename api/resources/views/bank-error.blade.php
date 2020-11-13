@@ -24,5 +24,5 @@
 <script type="text/javascript">
     setTimeout(() => {
         window.location = "{{ env('WEB_URL') }}" + '/card';
-    }, 3000)
+    }, 2000)
 </script>
