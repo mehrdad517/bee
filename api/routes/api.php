@@ -931,7 +931,7 @@ Route::prefix('/')->middleware('access')->group(function () {
 
             $result = $gateway->verify($transaction); // return status, msg
 
-            if ($result['status'] === 'success') {
+            if ($result['status']) {
                 $order->status = 1;
                 $order->save();
             } else {
