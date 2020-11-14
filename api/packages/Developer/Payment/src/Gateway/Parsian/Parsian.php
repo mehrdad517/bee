@@ -128,12 +128,11 @@ class Parsian extends GatewayAbstract implements GatewayInterface
                     "requestData" => $params
                 ]);
 
-                dd($result);
 
                 if ($result->ConfirmPaymentResult->Status != '0') {
                     $err_msg = $result->ConfirmPaymentResult->Message;
                 } else {
-                    $this->refId = $result->ConfirmPaymentResult->RefID;
+                    $this->refId = $result->ConfirmPaymentResult->RRN;
                     $this->transactionSucceed($transaction);
                     return ['status' => true, 'payload' => $result];
                 }
